@@ -48,7 +48,7 @@ function Filtros() {
     <>
     <Filtro Nome='Preço' corTexto={'#757575'} conteudo={<RangeSlider />}/>
     <Filtro Nome='Tipo de Evento' corTexto={'#757575'} conteudo={<CheckBox />}/>
-    <Filtro Nome='Data' corTexto={'#757575'} conteudo={<Data />}/>
+    {/* <Filtro Nome='Data' corTexto={'#757575'} conteudo={<DatePicker />}/> */}
     </>
     }/>
     
@@ -100,23 +100,6 @@ function CheckBox(){
       <FormControlLabel control={<Checkbox />} label="Dança" />
       <FormControlLabel control={<Checkbox />} label="Esporte" />
     </FormGroup>
-  );
-}
-
-function Data() {
-  const [value, setValue] = useState(null);
-
-  return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <DatePicker
-        label="Selecione a data"
-        value={value}
-        onChange={(newValue) => {
-          setValue(newValue);
-        }}
-        renderInput={(params) => <TextField {...params} />}
-      />
-    </LocalizationProvider>
   );
 }
 
