@@ -7,13 +7,17 @@ import Button from '@mui/material/Button';
 import { Avatar } from '@mui/material';
 import Container from '@mui/material/Container';
 import Accordion from '@mui/material/Accordion';
-import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Slider from '@mui/material/Slider';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
   <>
@@ -22,7 +26,7 @@ function App() {
       <Filtros />
     </Container>
   </>
-  )
+  );
 }
 
 function Header() {
@@ -39,31 +43,81 @@ function Header() {
 
 function Filtros() {
   return(
-    <Accordion sx={{backgroundColor: '#1976D2', color: 'white',}}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon sx={{color: 'white'}}/>}
-          aria-controls="panel1-content"
-          id="panel1-header"
-        >
-          Filtros
-        </AccordionSummary>
-        <AccordionDetails>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1-content"
-              id="panel1-header"
-            >
-              Accordion 1
-            </AccordionSummary>
-            <AccordionDetails>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-              malesuada lacus ex, sit amet blandit leo lobortis eget.
-            </AccordionDetails>
-          </Accordion>
-        </AccordionDetails>
-      </Accordion>
-  )
+    <Filtro Nome={'Filtros'} corFundo={'#1976D2'} corTexto={'white'} 
+    conteudo={
+    <>
+    <Filtro Nome='Preço' corTexto={'#757575'} conteudo={<RangeSlider />}/>
+    <Filtro Nome='Tipo de Evento' corTexto={'#757575'} conteudo={<CheckBox />}/>
+    <Filtro Nome='Data' corTexto={'#757575'} conteudo={<Data />}/>
+    </>
+    }/>
+    
+  );
+}
+
+function Filtro({Nome, corFundo, corTexto, conteudo}){
+  return(
+    <Accordion sx={{backgroundColor: corFundo, color: corTexto, mb: 2}}>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon sx={{color: corTexto}}/>}
+        aria-controls="filtros-content"
+        id="filtros-header"
+      >
+        {Nome}
+      </AccordionSummary>
+      <AccordionDetails>
+        {conteudo}
+      </AccordionDetails>
+    </Accordion>
+  );
+}
+
+function RangeSlider(){
+  const [value, setValue] = React.useState([0, 100]);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return(
+    <Slider
+      getAriaLabel={() => 'Preço'}
+      value={value}
+      onChange={handleChange}
+      valueLabelDisplay="auto"
+    />
+  );
+}
+
+function CheckBox(){
+  return (
+    <FormGroup>
+      <FormControlLabel control={<Checkbox />} label="Musica" />
+      <FormControlLabel control={<Checkbox />} label="Oficina" />
+      <FormControlLabel control={<Checkbox />} label="Comida / Gastronomia" />
+      <FormControlLabel control={<Checkbox />} label="Cinema e Teatro" />
+      <FormControlLabel control={<Checkbox />} label="Museu" />
+      <FormControlLabel control={<Checkbox />} label="Dança" />
+      <FormControlLabel control={<Checkbox />} label="Esporte" />
+    </FormGroup>
+  );
+}
+
+function Data() {
+  const [value, setValue] = useState(null);
+
+  return (
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <DatePicker
+        label="Selecione a data"
+        value={value}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
+        renderInput={(params) => <TextField {...params} />}
+      />
+    </LocalizationProvider>
+  );
 }
 
 export default App
