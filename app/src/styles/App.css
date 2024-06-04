@@ -3,6 +3,11 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  overflow-x: hidden;
+}
+
+html,body{
+  height: 100%;
 }
 
 .logo {
@@ -41,3 +46,16 @@
   color: #888;
 }
 
+.image-slide {
+  position: relative;
+}
+
+.image-title {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
