@@ -7,11 +7,34 @@ import CheckBox from '../components/CheckBox';
 import RangeSlider from '../components/RangeSlider';
 import HoraPicker from '../components/HoraPicker';
 import Evento from '../components/Evento';
+import ImageSlider from '../components/ImageSlider';
 
 function Home(){
+
+  const images = [
+    {
+      url: 'https://imgs.search.brave.com/ZDno8QOXgUfXHIdkiCsPfqG71jxI5gHS_yngR8tnhjk/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9idXJz/dC5zaG9waWZ5Y2Ru/LmNvbS9waG90b3Mv/c2NlbmljLW1vdW50/YWluLWxhbmRzY2Fw/ZS5qcGc_d2lkdGg9/MTAwMCZmb3JtYXQ9/cGpwZyZleGlmPTAm/aXB0Yz0w',
+      title: 'Image 1',
+      link: 'https://example.com/page1'
+    },
+    {
+      url: 'https://imgs.search.brave.com/HyjWzwYbB76UQRqJ7Xol7utBBUvGpXBTeHIyugUZsnw/rs:fit:500:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAwLzUwLzEzLzQw/LzM2MF9GXzUwMTM0/MDY5X29FU1pkQXJB/WHUzdmtvaXhUZHRk/QWZ2Uk5qMGZ1Vm1a/LmpwZw',
+      title: 'Image 2',
+      link: 'https://example.com/page2'
+    },
+    {
+      url: 'https://imgs.search.brave.com/QDnhn6ibfZEO7FCWjiQbIwdr2OKIF3WRzW6EbBuF7wc/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9idXJz/dC5zaG9waWZ5Y2Ru/LmNvbS9waG90b3Mv/bmF0dXJlLW1vdW50/YWlucy1yaXZlci1s/YW5kc2NhcGUtYWR2/ZW50dXJlLmpwZz93/aWR0aD0xMDAwJmZv/cm1hdD1wanBnJmV4/aWY9MCZpcHRjPTA',
+      title: 'Image 3',
+      link: 'https://example.com/page3'
+    }
+  ];
+
     return (
         <>
           <Header />
+          <Container maxWidth="sm" sx={{mt: 5}}>
+            <ImageSlider images={images} />
+          </Container>
           <Container maxWidth="sm" sx={{mt: 5}}>
             <Filtros />
           </Container>

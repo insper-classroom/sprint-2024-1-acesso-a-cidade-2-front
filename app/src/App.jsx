@@ -2,7 +2,8 @@ import { useState } from 'react'
 import './styles/App.css'
 import React from 'react';
 import AppRoutes from './routes/Routes'
-import { BrowserRouter as Router } from 'react-router-dom';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 
 function App() {
