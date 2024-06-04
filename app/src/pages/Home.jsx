@@ -40,6 +40,7 @@ function Home(){
           </Container>
           <Container maxWidth="sm" sx={{mt: 5}}>
             <Evento />
+            <Evento />
           </Container>
         </>
         );
@@ -49,16 +50,26 @@ function Filtros() {
 
   const [valueData, setValueData] = React.useState(null);
 
+  const [selectedOptions, setSelectedOptions] = React.useState([]);
+
+  const handleChange = (value) => {
+    setSelectedOptions((prev) =>
+      prev.includes(value)
+        ? prev.filter((option) => option !== value)
+        : [...prev, value]
+    );
+  };
+
     return(
       <Filtro Nome={'Filtros'} corFundo={'#1976D2'} corTexto={'white'} 
       conteudo={
       <>
       <Filtro Nome='Preço' corTexto={'#757575'} conteudo={<RangeSlider />}/>
-      <Filtro Nome='Tipo de Evento' corTexto={'#757575'} conteudo={<CheckBox opcoes={['Musica','Esporte','Cinema e Teatro', 'Oficina','Comida / Gastronomia','Museu','Dança']} />}/>
+      <Filtro Nome='Tipo de Evento' corTexto={'#757575'} conteudo={<CheckBox handleChange={handleChange} selectedOptions={selectedOptions} opcoes={['Musica','Esporte','Cinema e Teatro', 'Oficina','Comida / Gastronomia','Museu','Dança']} />}/>
       <Filtro Nome='Data' corTexto={'#757575'} conteudo={<DataPicker />}/>
       <Filtro Nome='Horário' corTexto={'#757575'} conteudo={<HoraPicker />}/>
-      <Filtro Nome='Área' corTexto={'#757575'} conteudo={<CheckBox opcoes={['Fora de Heliópolis', 'Mina', 'sla']} />}/>
-      <Filtro Nome='Faixa Etária' corTexto={'#757575'} conteudo={<CheckBox opcoes={['Jovens','Velhos']} />}/>
+      <Filtro Nome='Área' corTexto={'#757575'} conteudo={<CheckBox handleChange={handleChange} selectedOptions={selectedOptions} opcoes={['Fora de Heliópolis', 'Mina', 'sla']} />}/>
+      <Filtro Nome='Faixa Etária' corTexto={'#757575'} conteudo={<CheckBox handleChange={handleChange} selectedOptions={selectedOptions} opcoes={['Jovens','Velhos']} />}/>
       </>
       }/>
       
