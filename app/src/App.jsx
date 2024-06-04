@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './App.css'
+import './styles/App.css'
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,7 +14,6 @@ import Slider from '@mui/material/Slider';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 
 function App() {
@@ -48,7 +47,7 @@ function Filtros() {
     <>
     <Filtro Nome='Preço' corTexto={'#757575'} conteudo={<RangeSlider />}/>
     <Filtro Nome='Tipo de Evento' corTexto={'#757575'} conteudo={<CheckBox />}/>
-    {/* <Filtro Nome='Data' corTexto={'#757575'} conteudo={<DatePicker />}/> */}
+    <Filtro Nome='Data' corTexto={'#757575'} conteudo={<DataPicker />}/>
     </>
     }/>
     
@@ -101,6 +100,10 @@ function CheckBox(){
       <FormControlLabel control={<Checkbox />} label="Esporte" />
     </FormGroup>
   );
+}
+
+function DataPicker(){
+
 }
 
 export default App
