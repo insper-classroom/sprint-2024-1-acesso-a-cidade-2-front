@@ -31,11 +31,11 @@ function Filtros() {
       conteudo={
       <>
       <Filtro Nome='Preço' corTexto={'#757575'} conteudo={<RangeSlider />}/>
-      <Filtro Nome='Tipo de Evento' corTexto={'#757575'} conteudo={<CheckBox />}/>
+      <Filtro Nome='Tipo de Evento' corTexto={'#757575'} conteudo={<CheckBox opcoes={['Musica','Esporte','Cinema e Teatro', 'Oficina','Comida / Gastronomia','Museu','Dança']} />}/>
       <Filtro Nome='Data' corTexto={'#757575'} conteudo={<DataPicker />}/>
       <Filtro Nome='Horário' corTexto={'#757575'} conteudo={<HoraPicker />}/>
-      <Filtro Nome='Área' corTexto={'#757575'} conteudo={<CheckBox />}/>
-      <Filtro Nome='Faixa Etária' corTexto={'#757575'} conteudo={<CheckBox />}/>
+      <Filtro Nome='Área' corTexto={'#757575'} conteudo={<CheckBox opcoes={['Fora de Heliópolis', 'Mina', 'sla']} />}/>
+      <Filtro Nome='Faixa Etária' corTexto={'#757575'} conteudo={<CheckBox opcoes={['Jovens','Velhos']} />}/>
       </>
       }/>
       

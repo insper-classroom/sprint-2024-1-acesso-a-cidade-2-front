@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Favoritos'];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);

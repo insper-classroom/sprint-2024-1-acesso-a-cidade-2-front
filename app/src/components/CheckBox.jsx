@@ -3,16 +3,17 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import React from 'react';
 
-function CheckBox(){
+function CheckBox({opcoes}){
+
+    const lista = opcoes
+
     return (
         <FormGroup>
-        <FormControlLabel control={<Checkbox />} label="Musica" />
-        <FormControlLabel control={<Checkbox />} label="Oficina" />
-        <FormControlLabel control={<Checkbox />} label="Comida / Gastronomia" />
-        <FormControlLabel control={<Checkbox />} label="Cinema e Teatro" />
-        <FormControlLabel control={<Checkbox />} label="Museu" />
-        <FormControlLabel control={<Checkbox />} label="Dança" />
-        <FormControlLabel control={<Checkbox />} label="Esporte" />
+        {
+            lista.map((opcao) => (
+                <FormControlLabel control={<Checkbox />} label={opcao} />
+
+        ))}
         </FormGroup>
     );
     }
