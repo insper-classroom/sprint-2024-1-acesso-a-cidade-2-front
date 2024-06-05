@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
-const settings = ['Login', 'Favoritos'];
+const settings = ['Login', 'Favoritos', 'Admin'];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -32,11 +32,13 @@ function Header() {
       navigate('/login');
     } else if (page === 'Favoritos') {
       navigate('/favoritos');
+    } else if (page === 'Admin') {
+      navigate('/admin');
     }
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{width: '100%'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -44,7 +46,7 @@ function Header() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -62,7 +64,7 @@ function Header() {
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
