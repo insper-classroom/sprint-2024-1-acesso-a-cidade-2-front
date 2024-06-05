@@ -8,8 +8,11 @@ import RangeSlider from '../components/RangeSlider';
 import HoraPicker from '../components/HoraPicker';
 import Evento from '../components/Evento';
 import ImageSlider from '../components/ImageSlider';
+import EventDialog from '../components/EventDialog';
 
 function Home(){
+  const [selectedEvent, setSelectedEvent] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
 
   const images = [
     {
@@ -29,11 +32,21 @@ function Home(){
     }
   ];
 
+  const handleClickOpen = (event) => {
+    setSelectedEvent(event);
+    setOpen(true);
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedEvent(null);
+  }
+
     return (
         <>
           <Header />
           <Container maxWidth="sm" sx={{mt: 5}}>
-            <ImageSlider images={images} />
+            <ImageSlider images={images} onImageClick={handleClickOpen} />
           </Container>
           <Container maxWidth="sm" sx={{mt: 5}}>
             <Filtros />
@@ -42,6 +55,7 @@ function Home(){
             <Evento />
             <Evento />
           </Container>
+          <EventDialog event={selectedEvent} open={open} onClose={handleClose} />
         </>
         );
 }

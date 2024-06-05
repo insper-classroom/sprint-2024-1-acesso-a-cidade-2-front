@@ -1,7 +1,7 @@
 import React from 'react';
 import Slider from 'react-slick';
 
-const ImageSlider = ({ images }) => {
+const ImageSlider = ({ images, onImageClick }) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -15,11 +15,9 @@ const ImageSlider = ({ images }) => {
   return (
     <Slider {...settings}>
       {images.map((image, index) => (
-        <div key={index} className="image-slide">
-          <a href={image.link} rel="noopener noreferrer">
+        <div key={index} className="image-slide" onClick={() => onImageClick(image)} style={{ cursor: 'pointer' }}>
             <img src={image.url} alt={image.title} style={{ width: '100%', height: '200px' }} />
             <div className="image-title">{image.title}</div>
-          </a>
         </div>
       ))}
     </Slider>
