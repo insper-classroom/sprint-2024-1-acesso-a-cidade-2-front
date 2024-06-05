@@ -8,6 +8,7 @@ import RangeSlider from '../components/RangeSlider';
 import HoraPicker from '../components/HoraPicker';
 import Evento from '../components/Evento';
 import ImageSlider from '../components/ImageSlider';
+import Button from '@mui/material/Button';
 
 function Home() {
   const [events, setEvents] = useState([]);
@@ -32,27 +33,45 @@ function Home() {
     }
   ];
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await fetch('http://127.0.0.1:5000/eventos');
-        if (!response.ok) {
-          throw new Error('Algo deu errado');
-        }
-        const data = await response.json();
-        setEvents(data);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchEvents = async (filters = null) => {
+    setLoading(true);
+    setError(null);
 
+    try {
+      const url = filters ? 'http://127.0.0.1:5000/eventos' : 'http://127.0.0.1:5000/eventos';
+      const options = filters
+        ? {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(filters),
+          }
+        : {};
+
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error('Algo deu errado');
+      }
+      const data = await response.json();
+      setEvents(data);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchEvents();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  const handleApplyFilters = (filters) => {
+    fetchEvents(filters);
+  };
+
+  if (loading) return <p>Carregando...</p>;
+  if (error) return <p>Erro: {error.message}</p>;
 
   return (
     <>
@@ -61,7 +80,7 @@ function Home() {
         <ImageSlider images={images} />
       </Container>
       <Container maxWidth="sm" sx={{ mt: 5 }}>
-        <Filtros />
+        <Filtros onApplyFilters={handleApplyFilters} />
       </Container>
       <Container maxWidth="sm" sx={{ mt: 5 }}>
         {events['eventos'].map((event) => (
@@ -81,9 +100,11 @@ function Home() {
   );
 }
 
-function Filtros() {
-  const [valueData, setValueData] = React.useState(null);
-  const [selectedOptions, setSelectedOptions] = React.useState([]);
+function Filtros({ onApplyFilters }) {
+  const [valueData, setValueData] = useState(null);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [priceRange, setPriceRange] = useState([0, 100]);
+  const [timeRange, setTimeRange] = useState([0, 24]);
 
   const handleChange = (value) => {
     setSelectedOptions((prev) =>
@@ -93,6 +114,16 @@ function Filtros() {
     );
   };
 
+  const handleApplyFilters = () => {
+    const filters = {
+      date: valueData,
+      types: selectedOptions,
+      priceRange: priceRange,
+      timeRange: timeRange,
+    };
+    onApplyFilters(filters);
+  };
+
   return (
     <Filtro
       Nome={'Filtros'}
@@ -100,14 +131,14 @@ function Filtros() {
       corTexto={'white'}
       conteudo={
         <>
-          <Filtro Nome='Preço' corTexto={'#757575'} conteudo={<RangeSlider />} />
+          <Filtro Nome='Preço' corTexto={'#757575'} conteudo={<RangeSlider value={priceRange} onChange={(_, newValue) => setPriceRange(newValue)} />} />
           <Filtro
             Nome='Tipo de Evento'
             corTexto={'#757575'}
             conteudo={<CheckBox handleChange={handleChange} selectedOptions={selectedOptions} opcoes={['Musica', 'Esporte', 'Cinema e Teatro', 'Oficina', 'Comida / Gastronomia', 'Museu', 'Dança']} />}
           />
-          <Filtro Nome='Data' corTexto={'#757575'} conteudo={<DataPicker />} />
-          <Filtro Nome='Horário' corTexto={'#757575'} conteudo={<HoraPicker />} />
+          <Filtro Nome='Data' corTexto={'#757575'} conteudo={<DataPicker value={valueData} onChange={(newValue) => setValueData(newValue)} />} />
+          <Filtro Nome='Horário' corTexto={'#757575'} conteudo={<HoraPicker value={timeRange} onChange={(_, newValue) => setTimeRange(newValue)} />} />
           <Filtro
             Nome='Área'
             corTexto={'#757575'}
@@ -118,6 +149,7 @@ function Filtros() {
             corTexto={'#757575'}
             conteudo={<CheckBox handleChange={handleChange} selectedOptions={selectedOptions} opcoes={['Jovens', 'Velhos']} />}
           />
+          <Button variant="contained" sx={{backgroundColor: 'white', color: '#757575'}} onClick={handleApplyFilters}>Aplicar</Button>
         </>
       }
     />
