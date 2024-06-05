@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '@mui/material/Container';
-import Header from '../components/Header'
-import Filtro from '../components/Filtro'
-import DataPicker from '../components/DataPicker'
+import Header from '../components/Header';
+import Filtro from '../components/Filtro';
+import DataPicker from '../components/DataPicker';
 import CheckBox from '../components/CheckBox';
 import RangeSlider from '../components/RangeSlider';
 import HoraPicker from '../components/HoraPicker';
@@ -13,6 +13,9 @@ import EventDialog from '../components/EventDialog';
 function Home(){
   const [selectedEvent, setSelectedEvent] = React.useState(null);
   const [open, setOpen] = React.useState(false);
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const images = [
     {
@@ -42,28 +45,58 @@ function Home(){
     setSelectedEvent(null);
   }
 
-    return (
-        <>
-          <Header />
-          <Container maxWidth="sm" sx={{mt: 5}}>
-            <ImageSlider images={images} onImageClick={handleClickOpen} />
-          </Container>
-          <Container maxWidth="sm" sx={{mt: 5}}>
-            <Filtros />
-          </Container>
-          <Container maxWidth="sm" sx={{mt: 5}}>
-            <Evento />
-            <Evento />
-          </Container>
-          <EventDialog event={selectedEvent} open={open} onClose={handleClose} />
-        </>
-        );
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:5000/eventos');
+        if (!response.ok) {
+          throw new Error('Algo deu errado');
+        }
+        const data = await response.json();
+        setEvents(data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  return (
+    <>
+      <Header />
+      <Container maxWidth="sm" sx={{ mt: 5 }}>
+        <ImageSlider images={images} onImageClick={handleClickOpen} />
+      </Container>
+      <Container maxWidth="sm" sx={{ mt: 5 }}>
+        <Filtros />
+      </Container>
+      <Container maxWidth="sm" sx={{ mt: 5 }}>
+        {events['eventos'].map((event) => (
+          <Evento
+            key={event._id}
+            info={{
+              image: event.imageUrl,
+              title: event.titulo,
+              description: event.descricao,
+              date: event.data,
+              location: event.location
+            }}
+          />
+        ))}
+      </Container>
+      <EventDialog event={selectedEvent} open={open} onClose={handleClose} />
+    </>
+  );
 }
 
 function Filtros() {
-
   const [valueData, setValueData] = React.useState(null);
-
   const [selectedOptions, setSelectedOptions] = React.useState([]);
 
   const handleChange = (value) => {
@@ -74,20 +107,35 @@ function Filtros() {
     );
   };
 
-    return(
-      <Filtro Nome={'Filtros'} corFundo={'#1976D2'} corTexto={'white'} 
+  return (
+    <Filtro
+      Nome={'Filtros'}
+      corFundo={'#1976D2'}
+      corTexto={'white'}
       conteudo={
-      <>
-      <Filtro Nome='Preço' corTexto={'#757575'} conteudo={<RangeSlider />}/>
-      <Filtro Nome='Tipo de Evento' corTexto={'#757575'} conteudo={<CheckBox handleChange={handleChange} selectedOptions={selectedOptions} opcoes={['Musica','Esporte','Cinema e Teatro', 'Oficina','Comida / Gastronomia','Museu','Dança']} />}/>
-      <Filtro Nome='Data' corTexto={'#757575'} conteudo={<DataPicker />}/>
-      <Filtro Nome='Horário' corTexto={'#757575'} conteudo={<HoraPicker />}/>
-      <Filtro Nome='Área' corTexto={'#757575'} conteudo={<CheckBox handleChange={handleChange} selectedOptions={selectedOptions} opcoes={['Fora de Heliópolis', 'Mina', 'sla']} />}/>
-      <Filtro Nome='Faixa Etária' corTexto={'#757575'} conteudo={<CheckBox handleChange={handleChange} selectedOptions={selectedOptions} opcoes={['Jovens','Velhos']} />}/>
-      </>
-      }/>
-      
-    );
-  }
+        <>
+          <Filtro Nome='Preço' corTexto={'#757575'} conteudo={<RangeSlider />} />
+          <Filtro
+            Nome='Tipo de Evento'
+            corTexto={'#757575'}
+            conteudo={<CheckBox handleChange={handleChange} selectedOptions={selectedOptions} opcoes={['Musica', 'Esporte', 'Cinema e Teatro', 'Oficina', 'Comida / Gastronomia', 'Museu', 'Dança']} />}
+          />
+          <Filtro Nome='Data' corTexto={'#757575'} conteudo={<DataPicker />} />
+          <Filtro Nome='Horário' corTexto={'#757575'} conteudo={<HoraPicker />} />
+          <Filtro
+            Nome='Área'
+            corTexto={'#757575'}
+            conteudo={<CheckBox handleChange={handleChange} selectedOptions={selectedOptions} opcoes={['Fora de Heliópolis', 'Mina', 'sla']} />}
+          />
+          <Filtro
+            Nome='Faixa Etária'
+            corTexto={'#757575'}
+            conteudo={<CheckBox handleChange={handleChange} selectedOptions={selectedOptions} opcoes={['Jovens', 'Velhos']} />}
+          />
+        </>
+      }
+    />
+  );
+}
 
 export default Home;

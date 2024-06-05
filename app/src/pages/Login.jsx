@@ -1,22 +1,40 @@
 import React, { useState } from 'react';
-import { Container, TextField, Button, Box, Typography, CssBaseline } from '@mui/material';
+import { Container, TextField, Button, Box, Typography, CssBaseline, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Header from '../components/Header';
 
 function Login() {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [senha, setSenha] = useState('');
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Adicione a lógica de autenticação aqui
-    console.log('Email:', email);
-    console.log('Password:', password);
-    login();
-    navigate('/admin');
+    setError(null);
+
+    try {
+      const response = await fetch('http://127.0.0.1:5000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, senha }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        login();
+        navigate('/admin');
+      } else {
+        setError('Credenciais inválidas. Por favor, tente novamente.');
+      }
+    } catch (error) {
+      setError('Erro ao tentar fazer login. Por favor, tente novamente mais tarde.');
+    }
   };
 
   return (
@@ -32,6 +50,7 @@ function Login() {
           alignItems: 'center',
         }}
       >
+        {error && <Alert severity="error">{error}</Alert>}
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
@@ -49,13 +68,13 @@ function Login() {
             margin="normal"
             required
             fullWidth
-            name="password"
+            name="senha"
             label="Senha"
             type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            id="senha"
+            autoComplete="current-senha"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
           />
           <Button
             type="submit"
