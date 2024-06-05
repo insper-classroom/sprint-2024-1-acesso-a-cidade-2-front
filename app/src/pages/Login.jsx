@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import { Container, TextField, Button, Box, Typography, CssBaseline } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import Header from '../components/Header';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aqui você pode adicionar a lógica de autenticação
+    // Adicione a lógica de autenticação aqui
     console.log('Email:', email);
     console.log('Password:', password);
+    login();
+    navigate('/admin');
   };
 
   return (
