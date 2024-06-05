@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from '../pages/Login';
+import CreateEvent from '../pages/CreateEvent';
 import Home from '../pages/Home';
 import AdminPage from '../pages/Admin';
 import { AuthProvider } from '../context/AuthContext';
@@ -12,6 +13,7 @@ function AppRoutes() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/create-event" element={<CreateEvent />} />
           <Route path="/login" element={<Login />} />
           <Route
             path="/admin" element={<AdminPage />}
