@@ -8,24 +8,27 @@ import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Box from '@mui/material/Box';
 
-export default function Evento() {
+export default function Evento({info}) {
 return (
     <Box sx={{padding: 1}}>
         <Card sx={{ maxWidth: 345}}>
             <CardActionArea>
-            <CardMedia
+            {/* Use a ternary operator to conditionally render CardMedia */}
+            {info.image ? (
+                <CardMedia
                 component="img"
                 height="140"
-                image="https://imgs.search.brave.com/3DOBUFp5zucDaUuJ9uwiS7bX6Be_bYLiLlRxbty2u80/rs:fit:500:0:0/g:ce/aHR0cHM6Ly93d3cu/cGV0ei5jb20uYnIv/YmxvZy8vd3AtY29u/dGVudC91cGxvYWRz/LzIwMjMvMDgvbGFn/YXJ0b3MtZGUtZXN0/aW1hY2FvLmpwZw"
+                image={info.image}
                 alt="evento"
-            />
+                />
+            ) : null}
+            
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                Lizard
+                {info.title}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                Lizards are a widespread group of squamate reptiles, with over 6,000
-                species, ranging across all continents except Antarctica
+                {info.description}
                 </Typography>
             </CardContent>
             </CardActionArea>
