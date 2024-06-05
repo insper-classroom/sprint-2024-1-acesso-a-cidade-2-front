@@ -6,7 +6,7 @@ import Home from '../pages/Home';
 import AdminPage from '../pages/Admin';
 import { AuthProvider } from '../context/AuthContext';
 import ProtectedRoute from '../components/ProtectedRoute';
-
+import Favorites from '../pages/Favorites';
 function AppRoutes() {
   return (
     <AuthProvider>
@@ -15,6 +15,7 @@ function AppRoutes() {
           <Route path="/" element={<Home />} />
           <Route path="/create-event" element={<CreateEvent />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/favorites" element={<Favorites />} />
           <Route
             path="/admin" element={<AdminPage />}
             // element={
