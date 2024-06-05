@@ -9,7 +9,7 @@ const EventDialog = ({ event, open, onClose }) => {
         <Card>
           <CardMedia
             component="img"
-            height="140"
+            height="200"
             image={event?.url}
             alt={event?.title}
           />
@@ -17,14 +17,13 @@ const EventDialog = ({ event, open, onClose }) => {
             <Typography gutterBottom variant="h5" component="div">
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {event?.description}
             </Typography>
             <Box mt={2}>
               <Typography variant="body1">
                 Data: {event?.date}
               </Typography>
               <Typography variant="body1">
-                Horário: {event?.time}
+                Horário: {event?.horario}
               </Typography>
               <Typography variant="body1">
                 Local: {event?.location}
@@ -32,7 +31,7 @@ const EventDialog = ({ event, open, onClose }) => {
 
             </Box>
               <Typography variant="body1">
-                Descrição{event?.description}
+                Descrição: {event?.description}
               </Typography>
           </CardContent>
         </Card>

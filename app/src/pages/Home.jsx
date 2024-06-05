@@ -78,14 +78,15 @@ function Home(){
       </Container>
       <Container maxWidth="sm" sx={{ mt: 5 }}>
         {events['eventos'].map((event) => (
-          <Evento
+          <Evento onImageClick={handleClickOpen}
             key={event._id}
             info={{
               image: event.imageUrl,
               title: event.titulo,
               description: event.descricao,
               date: event.data,
-              location: event.location
+              location: event.local,
+              horario: event.horario,
             }}
           />
         ))}
