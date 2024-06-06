@@ -6,19 +6,66 @@ function Favorites() {
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
-        // CHAMADA DE API AQUI COLOCAR A ROTA E O JWT 
-        fetch('/api/favorites')
-            .then(response => response.json())
-            .then(data => {
-                setEvents(data);
-            })
-            .catch(error => {
+        const fetchFavorites = async () => {
+            const token = localStorage.getItem('jwtToken');
+            console.log(token)
+            if (!token) {
+                console.error('Token não encontrado. Faça login novamente.');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/favoritos', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setEvents(data.eventos);
+                } else {
+                    console.error('Erro ao buscar eventos favoritos');
+                }
+            } catch (error) {
                 console.error('Erro ao buscar eventos favoritos:', error);
-            });
+            }
+        };
+
+        fetchFavorites();
     }, []);
-    // PRECISA ARRUMAR O NOME DAS VARIAVEIS 
+
+    const handleRemoveFavorite = async (eventId) => {
+        const token = localStorage.getItem('jwtToken');
+        if (!token) {
+            console.error('Token não encontrado. Faça login novamente.');
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/favoritos/${eventId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                setEvents(events.filter(event => event._id !== eventId));
+                console.log('Evento removido dos favoritos com sucesso');
+            } else {
+                console.error('Erro ao remover evento dos favoritos');
+            }
+        } catch (error) {
+            console.error('Erro ao remover evento dos favoritos:', error);
+        }
+    };
+
     return (
-        <> 
+        <>
             <Header />
             <Container component="main" maxWidth="md">
                 <CssBaseline />
@@ -28,17 +75,17 @@ function Favorites() {
                     </Typography>
                     <Box sx={{ mt: 2, width: '100%' }}>
                         {events.length > 0 ? events.map((event) => (
-                            <Card key={event.id} sx={{ marginBottom: 2 }}>
+                            <Card key={event._id} sx={{ marginBottom: 2 }}>
                                 <CardContent>
-                                    <Typography variant="h6">{event.title}</Typography>
-                                    <Typography color="text.secondary">{event.date}</Typography>
-                                    <Typography color="text.secondary">{event.location}</Typography>
+                                    <Typography variant="h6">{event.titulo}</Typography>
+                                    <Typography color="text.secondary">{event.data}</Typography>
+                                    <Typography color="text.secondary">{event.local}</Typography>
                                 </CardContent>
                                 <CardActions>
                                     <Button size="small" color="primary">
                                         Ver Detalhes
                                     </Button>
-                                    <Button size="small" color="secondary">
+                                    <Button size="small" color="secondary" onClick={() => handleRemoveFavorite(event._id)}>
                                         Remover dos Favoritos
                                     </Button>
                                 </CardActions>
