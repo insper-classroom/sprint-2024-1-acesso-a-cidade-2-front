@@ -105,6 +105,7 @@ function Home(){
               date: event.data,
               location: event.local,
               horario: event.horario,
+              id : event._id
             }}
           />
         ))}

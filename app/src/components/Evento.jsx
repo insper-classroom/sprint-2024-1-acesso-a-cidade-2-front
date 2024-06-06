@@ -33,6 +33,7 @@ export default function Evento({ info, onImageClick, onFavoriteClick }) {
       });
 
       if (response.ok) {
+        console.log(token)
         console.log(`Evento ${info.id} favoritado com sucesso.`);
         setIsFavorited(true);
         if (onFavoriteClick) {

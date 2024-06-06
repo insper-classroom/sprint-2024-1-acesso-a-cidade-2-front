@@ -6,9 +6,11 @@ function Favorites() {
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
+        let isMounted = true; // flag to track whether component is mounted
+
         const fetchFavorites = async () => {
             const token = localStorage.getItem('jwtToken');
-            console.log(token)
+            console.log(token); // Log the token for debugging purposes, remove or hide for production
             if (!token) {
                 console.error('Token não encontrado. Faça login novamente.');
                 return;
@@ -25,9 +27,12 @@ function Favorites() {
 
                 if (response.ok) {
                     const data = await response.json();
-                    setEvents(data.eventos);
+                    if (isMounted) {
+                        setEvents(data.eventos);
+                    }
                 } else {
-                    console.error('Erro ao buscar eventos favoritos');
+                    const errorMsg = await response.text(); // Getting detailed error message
+                    console.error('Erro ao buscar eventos favoritos:', errorMsg);
                 }
             } catch (error) {
                 console.error('Erro ao buscar eventos favoritos:', error);
@@ -35,6 +40,7 @@ function Favorites() {
         };
 
         fetchFavorites();
+        return () => { isMounted = false }; // Cleanup function to set the flag as false
     }, []);
 
     const handleRemoveFavorite = async (eventId) => {
@@ -54,10 +60,11 @@ function Favorites() {
             });
 
             if (response.ok) {
-                setEvents(events.filter(event => event._id !== eventId));
+                setEvents(prevEvents => prevEvents.filter(event => event._id !== eventId));
                 console.log('Evento removido dos favoritos com sucesso');
             } else {
-                console.error('Erro ao remover evento dos favoritos');
+                const errorMsg = await response.text(); // Getting detailed error message
+                console.error('Erro ao remover evento dos favoritos:', errorMsg);
             }
         } catch (error) {
             console.error('Erro ao remover evento dos favoritos:', error);
