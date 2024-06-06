@@ -1,4 +1,5 @@
 import React from 'react';
+import Cadastro from '../pages/Cadastro';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from '../pages/Login';
 import CreateEvent from '../pages/CreateEvent';
@@ -12,6 +13,7 @@ function AppRoutes() {
     <AuthProvider>
       <Router>
         <Routes>
+          <Route path="/" element={<Cadastro />} />
           <Route path="/" element={<Home />} />
           <Route path="/create-event" element={<CreateEvent />} />
           <Route path="/login" element={<Login />} />
