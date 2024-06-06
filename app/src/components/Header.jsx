@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,10 +12,11 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
-const settings = ['Favoritos'];
+const settings = ['Login', 'Favoritos', 'Perfil', 'Admin'];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -24,8 +26,21 @@ function Header() {
     setAnchorElNav(null);
   };
 
+  const handleMenuItemClick = (page) => {
+    handleCloseNavMenu();
+    if (page === 'Login') {
+      navigate('/login');
+    } else if (page === 'Favoritos') {
+      navigate('/favorites');
+    } else if (page === 'Admin') {
+      navigate('/admin');
+    } else if (page === 'Perfil') {
+      navigate('/perfil');
+    }
+  };
+
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{width: '100%'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -33,7 +48,7 @@ function Header() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -51,7 +66,7 @@ function Header() {
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -70,7 +85,7 @@ function Header() {
             {settings.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => handleMenuItemClick(page)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
@@ -108,7 +123,7 @@ function Header() {
               }}
             >
               {settings.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={() => handleMenuItemClick(page)}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -118,6 +133,6 @@ function Header() {
       </Container>
     </AppBar>
   );
-  }
+}
 
 export default Header;
