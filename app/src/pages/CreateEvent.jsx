@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, CssBaseline, Box, TextField, Button, Typography } from '@mui/material';
 import Header from '../components/Header';
+
 const CreateEvent = () => {
   const [formData, setFormData] = useState({
     titulo: '',
@@ -15,6 +16,8 @@ const CreateEvent = () => {
     imagem: null
   });
 
+  const [error, setError] = useState('');
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
@@ -26,8 +29,54 @@ const CreateEvent = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Implementar a lógica de envio de dados aqui
-    console.log('Dados enviados:', formData);
+    console.log('Form submitted');
+
+    const token = localStorage.getItem('jwtToken');
+    if (!token) {
+      setError('Token não encontrado. Faça login novamente.');
+      return;
+    }
+
+    console.log('Token encontrado:', token);
+
+    const form = new FormData();
+    form.append('titulo', formData.titulo);
+    form.append('descricao', formData.descricao);
+    form.append('valor', formData.valor);
+    form.append('data', formData.data);
+    form.append('local', formData.local);
+    form.append('horario', formData.horario);
+    form.append('tipo', formData.tipo);
+    form.append('area', formData.area);
+    form.append('status', formData.status);
+    form.append('imagem', formData.imagem);
+
+    console.log('Form data prepared:', form);
+
+    try {
+      const response = await fetch('http://127.0.0.1:5000/eventos', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+        body: form,
+      });
+
+      console.log('Server response:', response);
+
+      if (response.ok) {
+        // Sucesso ao criar evento
+        console.log('Evento criado com sucesso');
+      } else {
+        // Erro ao criar evento
+        const errorData = await response.json();
+        console.log('Server error response:', errorData);
+        setError(`Erro: ${errorData.message}`);
+      }
+    } catch (error) {
+      console.log('Catch block error:', error);
+      setError('Erro ao tentar criar o evento. Por favor, tente novamente mais tarde.');
+    }
   };
 
   return (
@@ -46,6 +95,7 @@ const CreateEvent = () => {
           <Typography component="h1" variant="h5">
             Cadastrar Evento
           </Typography>
+          {error && <Typography color="error">{error}</Typography>}
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
