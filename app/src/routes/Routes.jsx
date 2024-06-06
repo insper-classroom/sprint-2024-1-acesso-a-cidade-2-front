@@ -15,17 +15,10 @@ function AppRoutes() {
         <Routes>
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/" element={<Home />} />
-          <Route path="/create-event" element={<CreateEvent />} />
+          <Route path="/create-event" element={<ProtectedRoute> <CreateEvent /> </ProtectedRoute>} />
           <Route path="/login" element={<Login />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route
-            path="/admin" element={<AdminPage />}
-            // element={
-            //   <ProtectedRoute>
-            //     <AdminPage />
-            //   </ProtectedRoute>
-            // }
-          />
+          <Route path="/favorites" element={<ProtectedRoute> <Favorites /> </ProtectedRoute>} />
+          <Route path="/admin" element={<ProtectedRoute> <AdminPage /> </ProtectedRoute>} />
         </Routes>
       </Router>
     </AuthProvider>

@@ -7,18 +7,17 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const login = () => {
-    setIsLoggedIn(true);
+  const login = (token) => {
+    localStorage.setItem('jwtToken', token);
   };
 
   const logout = () => {
-    setIsLoggedIn(false);
+    localStorage.removeItem('jwtToken');
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{ login, logout }}>
       {children}
     </AuthContext.Provider>
   );
