@@ -10,6 +10,7 @@ import Evento from '../components/Evento';
 import ImageSlider from '../components/ImageSlider';
 import EventDialog from '../components/EventDialog';
 import Button from '@mui/material/Button';
+import { AuthProvider } from '../context/AuthContext';
 
 function Home(){
   const [selectedEvent, setSelectedEvent] = React.useState(null);

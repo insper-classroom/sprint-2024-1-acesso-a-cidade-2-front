@@ -10,9 +10,6 @@ function Login() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { login } = useAuth();
-  const saveToken = (token) => {
-    localStorage.setItem('jwtToken', token);
-  };  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -29,9 +26,14 @@ function Login() {
 
       const data = await response.json();
       if (response.status == 200) {
-        saveToken(data.token);
-        login();
-        navigate('/');
+        login(data.token);
+        localStorage.setItem("email", email);
+        localStorage.setItem("senha", senha);
+        if(data.admin){
+          navigate('/admin');
+        } else{
+          navigate('/');
+        }
       } else {
         setError('Credenciais inválidas. Por favor, tente novamente.');
       }
