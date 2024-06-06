@@ -8,9 +8,12 @@ import RangeSlider from '../components/RangeSlider';
 import HoraPicker from '../components/HoraPicker';
 import Evento from '../components/Evento';
 import ImageSlider from '../components/ImageSlider';
+import EventDialog from '../components/EventDialog';
 import Button from '@mui/material/Button';
 
-function Home() {
+function Home(){
+  const [selectedEvent, setSelectedEvent] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -32,7 +35,15 @@ function Home() {
       link: 'https://example.com/page3'
     }
   ];
+  const handleClickOpen = (event) => {
+    setSelectedEvent(event);
+    setOpen(true);
+  }
 
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedEvent(null);
+  }
   const fetchEvents = async (filters = null) => {
     setLoading(true);
     setError(null);
@@ -77,25 +88,27 @@ function Home() {
     <>
       <Header />
       <Container maxWidth="sm" sx={{ mt: 5 }}>
-        <ImageSlider images={images} />
+        <ImageSlider images={images} onImageClick={handleClickOpen} />
       </Container>
       <Container maxWidth="sm" sx={{ mt: 5 }}>
         <Filtros onApplyFilters={handleApplyFilters} />
       </Container>
       <Container maxWidth="sm" sx={{ mt: 5 }}>
         {events['eventos'].map((event) => (
-          <Evento
+          <Evento onImageClick={handleClickOpen}
             key={event._id}
             info={{
               image: event.imageUrl,
               title: event.titulo,
               description: event.descricao,
               date: event.data,
-              location: event.location
+              location: event.local,
+              horario: event.horario,
             }}
           />
         ))}
       </Container>
+      <EventDialog event={selectedEvent} open={open} onClose={handleClose} />
     </>
   );
 }

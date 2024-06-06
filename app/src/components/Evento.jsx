@@ -8,12 +8,12 @@ import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Box from '@mui/material/Box';
 
-export default function Evento({info}) {
+export default function Evento({info, onImageClick, onFavoriteClick}) {
 return (
     <Box sx={{padding: 1}}>
         <Card sx={{ maxWidth: 345}}>
-            <CardActionArea>
-            {/* Use a ternary operator to conditionally render CardMedia */}
+            <CardActionArea onClick={() => onImageClick(info)}>
+            {/* <CardActionArea> */}
             {info.image ? (
                 <CardMedia
                 component="img"
