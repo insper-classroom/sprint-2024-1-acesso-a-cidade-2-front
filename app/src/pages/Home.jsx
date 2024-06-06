@@ -98,7 +98,7 @@ function Home(){
           <Evento onImageClick={handleClickOpen}
             key={event._id}
             info={{
-              image: event.imageUrl,
+              image: 'http://127.0.0.1:5000' + event.imageUrl,
               title: event.titulo,
               description: event.descricao,
               date: event.data,
