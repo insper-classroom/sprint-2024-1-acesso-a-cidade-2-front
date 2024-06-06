@@ -52,7 +52,7 @@ function Home(){
     try {
       const url = filters ? 'http://127.0.0.1:5000/filtros' : 'http://127.0.0.1:5000/eventos';
       const options = filters
-      console.log(filters)
+
         ? {
             method: 'POST',
             headers: {
@@ -68,6 +68,7 @@ function Home(){
       }
       const data = await response.json();
       setEvents(data);
+
     } catch (error) {
       setError(error);
     } finally {
@@ -100,7 +101,7 @@ function Home(){
           <Evento onImageClick={handleClickOpen}
             key={event._id}
             info={{
-              image: event.imageUrl,
+              image: 'http://127.0.0.1:5000'+ event.imagem,
               title: event.titulo,
               description: event.descricao,
               date: event.data,
