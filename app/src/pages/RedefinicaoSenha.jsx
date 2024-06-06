@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
-import FormCadastro from '../components/FormCadastro'
+import FormSenha from '../components/FormSenha'
 import { Container } from '@mui/material';
 import Header from '../components/Header';
 
-function Cadastro() {
+function RedefinicaoSenha() {
     return (
         <>
           <Header/>
           <Container maxWidth="sm">
-              <FormCadastro />
+              <FormToken />
+          </Container>
+          <Container maxWidth="sm">
+              <FormSenha />
           </Container>
         </>
     );
 }
 
-export default Cadastro;
+export default RedefinicaoSenha;
