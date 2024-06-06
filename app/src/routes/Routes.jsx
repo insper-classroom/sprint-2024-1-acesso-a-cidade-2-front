@@ -13,7 +13,7 @@ function AppRoutes() {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Cadastro />} />
+          <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/" element={<Home />} />
           <Route path="/create-event" element={<CreateEvent />} />
           <Route path="/login" element={<Login />} />

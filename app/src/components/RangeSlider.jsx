@@ -11,7 +11,7 @@ function RangeSlider(){
     };
   
     return(
-      <Box sx={{ width: 480 }}>
+      <Box>
         <Slider
           getAriaLabel={() => 'Preço'}
           value={value}
