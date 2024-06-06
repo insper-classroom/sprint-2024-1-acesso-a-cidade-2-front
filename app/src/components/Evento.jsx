@@ -11,13 +11,13 @@ import Box from '@mui/material/Box';
 export default function Evento({info, onImageClick, onFavoriteClick}) {
 return (
     <Box sx={{padding: 1}}>
-        <Card sx={{ maxWidth: 345}}>
+        <Card sx={{ maxWidth: 550, borderRadius: 5 }}>
             <CardActionArea onClick={() => onImageClick(info)}>
             {/* <CardActionArea> */}
             {info.image ? (
                 <CardMedia
                 component="img"
-                height="140"
+                height="150"
                 image={info.image}
                 alt="evento"
                 />

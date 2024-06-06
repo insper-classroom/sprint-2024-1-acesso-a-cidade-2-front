@@ -88,7 +88,7 @@ function Home(){
     <>
       <Header />
       <Container maxWidth="sm" sx={{ mt: 5 }}>
-        <ImageSlider images={images} onImageClick={handleClickOpen} />
+        <ImageSlider images={images} onImageClick={handleClickOpen}/>
       </Container>
       <Container maxWidth="sm" sx={{ mt: 5 }}>
         <Filtros onApplyFilters={handleApplyFilters} />

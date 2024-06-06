@@ -3,10 +3,10 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Card, CardMe
 
 const EventDialog = ({ event, open, onClose }) => {
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={onClose} >
       <DialogTitle>{event?.title}</DialogTitle>
       <DialogContent>
-        <Card>
+        <Card sx = {{borderRadius: 5}}>
           <CardMedia
             component="img"
             height="200"
