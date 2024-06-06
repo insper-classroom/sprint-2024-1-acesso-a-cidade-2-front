@@ -25,10 +25,9 @@ function Login() {
       });
 
       const data = await response.json();
-
-      if (data.success) {
+      if (response.status == 200) {
         login();
-        navigate('/admin');
+        navigate('/');
       } else {
         setError('Credenciais inválidas. Por favor, tente novamente.');
       }

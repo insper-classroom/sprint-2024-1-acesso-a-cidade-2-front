@@ -31,7 +31,7 @@ function Header() {
     if (page === 'Login') {
       navigate('/login');
     } else if (page === 'Favoritos') {
-      navigate('/favoritos');
+      navigate('/favorites');
     } else if (page === 'Admin') {
       navigate('/admin');
     } else if (page === 'Perfil') {
