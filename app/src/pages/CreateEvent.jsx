@@ -12,7 +12,7 @@ const CreateEvent = () => {
     horario: '',
     tipo: '',
     area: '',
-    status: '',
+    status: 'PENDENTE',
     imagem: null
   });
 
@@ -178,15 +178,6 @@ const CreateEvent = () => {
               label="Área do evento"
               name="area"
               value={formData.area}
-              onChange={handleChange}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              label="Status do evento"
-              name="status"
-              value={formData.status}
               onChange={handleChange}
             />
             <Button
