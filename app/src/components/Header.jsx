@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
-const settings = ['Login', 'Favoritos', 'Perfil', 'Admin'];
+const settings = ['Login', 'Cadastro', 'Favoritos', 'Perfil', 'Admin'];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -36,6 +36,8 @@ function Header() {
       navigate('/admin');
     } else if (page === 'Perfil') {
       navigate('/perfil');
+    } else if (page === 'Cadastro') {
+      navigate('/cadastro');
     }
   };
 
