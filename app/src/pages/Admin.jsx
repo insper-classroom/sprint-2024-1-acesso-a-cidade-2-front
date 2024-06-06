@@ -1,8 +1,39 @@
 import React, { useState } from 'react';
 import { Container, Typography, List, ListItem, ListItemText, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Box, Card, CardMedia, CardContent } from '@mui/material';
 import Header from '../components/Header';
+import { useNavigate } from 'react-router-dom';
 
 const AdminPage = () => {
+  const verificaAdmin = async () => {
+    const navigate = useNavigate();
+
+    try {
+      const email = localStorage.getItem('email')
+      const senha = localStorage.getItem('senha')
+      const response = await fetch('http://127.0.0.1:5000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email , senha }),
+      });
+
+      const data = await response.json();
+      if (response.status != 200) {
+        throw new Error('algo deu errado');
+      }
+
+      if(!data.admin){
+        throw new Error('você não é admin');
+      }
+    } catch (error) {
+      console.error('Erro durante a verificação:', error);
+      navigate('/');
+    }
+  };
+
+  verificaAdmin()
+
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [open, setOpen] = useState(false);
 

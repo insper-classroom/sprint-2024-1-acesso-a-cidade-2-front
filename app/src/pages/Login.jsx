@@ -27,7 +27,13 @@ function Login() {
       const data = await response.json();
       if (response.status == 200) {
         login(data.token);
-        navigate('/');
+        localStorage.setItem("email", email);
+        localStorage.setItem("senha", senha);
+        if(data.admin){
+          navigate('/admin');
+        } else{
+          navigate('/');
+        }
       } else {
         setError('Credenciais inválidas. Por favor, tente novamente.');
       }
