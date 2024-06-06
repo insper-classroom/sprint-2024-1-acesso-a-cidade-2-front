@@ -10,6 +10,9 @@ function Login() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { login } = useAuth();
+  const saveToken = (token) => {
+    localStorage.setItem('jwtToken', token);
+  };  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,6 +29,7 @@ function Login() {
 
       const data = await response.json();
       if (response.status == 200) {
+        saveToken(data.token);
         login();
         navigate('/');
       } else {

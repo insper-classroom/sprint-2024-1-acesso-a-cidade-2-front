@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import { TextField, Button, Box, Typography } from '@mui/material';
+import { TextField, Button, Box, Typography, Alert} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const FormCadastro = () => {
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
-        name: '',
+        nome: '',
         cpf: '',
         email: '',
         email2: '',
-        password: '',
-        password2: ''
+        senha: '',
+        senha2: ''
     });
     const [errors, setErrors] = useState({});
 
@@ -21,23 +25,42 @@ const FormCadastro = () => {
 
     const validate = () => {
         let tempErrors = {};
-        if (!formData.name) tempErrors.name = 'Nome é obrigatório';
+        if (!formData.nome) tempErrors.name = 'Nome é obrigatório';
         if (!formData.email) tempErrors.email = 'Email é obrigatório';
         if (!formData.email2) tempErrors.email2 = 'Email de confirmação é obrigatório';
         if (formData.email !== formData.email2) tempErrors.email2 = 'Emails não são iguais';
-        if (!formData.password) tempErrors.password = 'Senha é obrigatória';
-        if (!formData.password2) tempErrors.password2 = 'Senha de confirmação é obrigatória';
-        if (formData.password !== formData.password2) tempErrors.password2 = 'Senhas não são iguais';
+        if (!formData.senha) tempErrors.senha = 'Senha é obrigatória';
+        if (!formData.senha2) tempErrors.senha2 = 'Senha de confirmação é obrigatória';
+        if (formData.senha !== formData.senha2) tempErrors.senha2 = 'Senhas não são iguais';
         if (!formData.cpf) tempErrors.cpf = 'CPF é obrigatório';
         else if (!/^\d{11}$/.test(formData.cpf)) tempErrors.cpf = 'CPF tem que ter 11 dígitos';
         return tempErrors;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const tempErrors = validate();
         if (Object.keys(tempErrors).length === 0) {
-            console.log('Form data submitted:', formData);
+            try {
+                const response = await fetch('http://127.0.0.1:5000/usuarios', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json(); // Captura a mensagem de erro do backend
+                    setError(errorData.message || 'Erro ao enviar os dados');
+                }
+
+                const data = await response.json();
+                console.log('Form data submitted successfully:', data);
+                navigate('/');
+            } catch (error) {
+                console.error('Erro ao enviar os dados:', error);
+            }
         } else {
             setErrors(tempErrors);
         }
@@ -59,6 +82,7 @@ const FormCadastro = () => {
             <Typography variant="h4" gutterBottom>
                 Cadastro
             </Typography>
+            {error && <Alert severity="error">{error}</Alert>}
             <TextField
                 label="Nome"
                 name="nome"

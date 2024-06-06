@@ -49,8 +49,9 @@ function Home(){
     setError(null);
 
     try {
-      const url = filters ? 'http://127.0.0.1:5000/eventos' : 'http://127.0.0.1:5000/eventos';
+      const url = filters ? 'http://127.0.0.1:5000/filtros' : 'http://127.0.0.1:5000/eventos';
       const options = filters
+      console.log(filters)
         ? {
             method: 'POST',
             headers: {
@@ -104,6 +105,7 @@ function Home(){
               date: event.data,
               location: event.local,
               horario: event.horario,
+              id : event._id
             }}
           />
         ))}
