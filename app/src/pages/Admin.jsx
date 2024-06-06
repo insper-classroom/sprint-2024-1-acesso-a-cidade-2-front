@@ -82,6 +82,54 @@ const AdminPage = () => {
     }
   };
 
+  // Função para aprovar evento
+  const handleApprove = async () => {
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/eventos/${selectedEvent._id}/Aprovado`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao aprovar evento');
+      }
+
+      console.log(`Evento ${selectedEvent._id} aprovado!`);
+      handleClose();
+      fetchEvents(); // Recarregar a lista de eventos
+    } catch (error) {
+      console.error('Erro ao aprovar evento:', error);
+      setError(error);
+    }
+  };
+
+  // Função para rejeitar evento
+  const handleReject = async () => {
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/eventos/${selectedEvent._id}/Rejeitado`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao rejeitar evento');
+      }
+
+      console.log(`Evento ${selectedEvent._id} rejeitado!`);
+      handleClose();
+      fetchEvents(); // Recarregar a lista de eventos
+    } catch (error) {
+      console.error('Erro ao rejeitar evento:', error);
+      setError(error);
+    }
+  };
+
   const handleClickOpen = (event) => {
     setSelectedEvent(event);
     setOpen(true);
@@ -90,18 +138,6 @@ const AdminPage = () => {
   const handleClose = () => {
     setOpen(false);
     setSelectedEvent(null);
-  };
-
-  const handleApprove = () => {
-    // Lógica de aprovação do evento
-    console.log(`Evento ${selectedEvent.id} aprovado!`);
-    handleClose();
-  };
-
-  const handleReject = () => {
-    // Lógica de rejeição do evento
-    console.log(`Evento ${selectedEvent.id} rejeitado!`);
-    handleClose();
   };
 
   if (loading) {
