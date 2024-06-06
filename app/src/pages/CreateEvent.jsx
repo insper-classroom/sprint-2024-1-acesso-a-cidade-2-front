@@ -54,6 +54,7 @@ const CreateEvent = () => {
     console.log('Form data prepared:', form);
 
     try {
+
       const response = await fetch('http://127.0.0.1:5000/eventos', {
         method: 'POST',
         headers: {

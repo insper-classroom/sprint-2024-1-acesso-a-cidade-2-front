@@ -57,7 +57,7 @@ const FormCadastro = () => {
 
                 const data = await response.json();
                 console.log('Form data submitted successfully:', data);
-                navigate('/');
+                navigate('/login');
             } catch (error) {
                 console.error('Erro ao enviar os dados:', error);
             }
@@ -141,10 +141,10 @@ const FormCadastro = () => {
                 label="Senha"
                 name="senha"
                 type="password"
-                value={formData.password}
+                value={formData.senha}
                 onChange={handleChange}
-                error={!!errors.password}
-                helperText={errors.password}
+                error={!!errors.senha}
+                helperText={errors.senha}
                 variant="outlined"
                 sx={{ marginBottom: 2, borderRadius: '16px' }}
                 InputProps={{
@@ -155,10 +155,10 @@ const FormCadastro = () => {
                 label="Confirme sua senha"
                 name="senha2"
                 type="password"
-                value={formData.password2}
+                value={formData.senha2}
                 onChange={handleChange}
-                error={!!errors.password2}
-                helperText={errors.password2}
+                error={!!errors.senha2}
+                helperText={errors.senha2}
                 variant="outlined"
                 sx={{ marginBottom: 2, borderRadius: '16px' }}
                 InputProps={{

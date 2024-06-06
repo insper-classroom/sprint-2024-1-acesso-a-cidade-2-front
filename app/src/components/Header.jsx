@@ -11,12 +11,17 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-
-const settings = ['Login', 'Cadastro', 'Favoritos', 'Perfil', 'Admin'];
+import { useAuth } from '../context/AuthContext';
 
 function Header() {
+  const { logout } = useAuth();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
+
+  const token = localStorage.getItem('jwtToken');
+  const settings = token == null 
+    ? ['Login', 'Cadastro', 'Cadastrar evento', 'Favoritos'] 
+    : ['Cadastrar evento', 'Favoritos', 'Logout'];
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -38,6 +43,11 @@ function Header() {
       navigate('/perfil');
     } else if (page === 'Cadastro') {
       navigate('/cadastro');
+    } else if (page === 'Cadastrar evento') {
+      navigate('/create-event');
+    } else if (page === 'Logout') {
+      logout()
+      navigate('/');
     }
   };
 

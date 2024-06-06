@@ -3,9 +3,9 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const ProtectedRoute = ({ children }) => {
-  const { isLoggedIn } = useAuth();
+  const token = localStorage.getItem('jwtToken');
 
-  if (!isLoggedIn) {
+  if (token == null) {
     return <Navigate to="/login" />;
   }
 
