@@ -151,7 +151,7 @@ function Filtros({ onApplyFilters }) {
       corTexto={'black'}
       conteudo={
         <>
-          <Filtro Nome='Preço' corTexto={'#757575'} conteudo={<RangeSlider value={priceRange} onChange={(_, newValue) => setPriceRange(newValue)} />} />
+          <Filtro Nome='Preço' corTexto={'#757575'} conteudo={<RangeSlider value={priceRange} onChange={(_, newValue) => setPriceRange(newValue)} sx={{backgroundColor: '#black'}} />} />
           <Filtro
             Nome='Tipo de Evento'
             corTexto={'#757575'}
@@ -175,7 +175,7 @@ function Filtros({ onApplyFilters }) {
               </RadioGroup>
             }
           />
-          <Button variant="contained" sx={{backgroundColor: 'white', color: '#757575'}} onClick={handleApplyFilters}>Aplicar</Button>
+          <Button variant="contained" sx={{backgroundColor: 'white', color: '#757575', marginTop: '3%'}} onClick={handleApplyFilters}>Aplicar</Button>
         </>
       }
     />
