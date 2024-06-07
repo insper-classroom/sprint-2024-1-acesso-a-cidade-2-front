@@ -12,7 +12,6 @@ export default function Evento({ info, onImageClick, onFavoriteClick }) {
   const [isFavorited, setIsFavorited] = useState(false);
 
   useEffect(() => {
-<<<<<<< Favoritos
     const fetchFavoritedEvents = async () => {
       const token = localStorage.getItem('jwtToken');
       if (!token) {
@@ -53,13 +52,8 @@ export default function Evento({ info, onImageClick, onFavoriteClick }) {
     const method = isFavorited ? 'DELETE' : 'POST'; // Determine the method based on the current favorite state
     const url = `http://127.0.0.1:5000/favoritos/${info.id}`;
     try {
-<<<<<<< Favoritos
       const response = await fetch(url, {
         method: method,
-=======
-      const response = await fetch(`/favoritos/${info.id}`, {
-        method: 'DELETE',
->>>>>>> main
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
