@@ -8,9 +8,9 @@ import AdminPage from '../pages/Admin';
 import { AuthProvider } from '../context/AuthContext';
 import ProtectedRoute from '../components/ProtectedRoute';
 import Favorites from '../pages/Favorites';
-import Senha from './pages/RedefinicaoSenha';
-import Update from './pages/Update';
-import Validacao from './pages/Validacao';
+import Senha from '../pages/RedefinicaoSenha';
+import Update from '../pages/Update';
+import Validacao from '../pages/Validacao';
 function AppRoutes() {
   return (
     <AuthProvider>
