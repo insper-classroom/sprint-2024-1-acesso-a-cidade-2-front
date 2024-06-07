@@ -12,7 +12,7 @@ const CreateEvent = () => {
     horario: '',
     tipo: '',
     area: '',
-    status: 'Aprovado',
+    status: 'Pendente',
     imagem: null
   });
 
