@@ -49,7 +49,7 @@ export default function Evento({ info, onImageClick, onFavoriteClick }) {
       console.error('Token não encontrado. Faça login novamente.');
       return;
     }
-    const method = isFavorited ? 'DELETE' : 'POST'; // Determine the method based on the current favorite state
+    const method = isFavorited ? 'DELETE' : 'GET'; // Determine the method based on the current favorite state
     const url = `https://sprint-2024-1-acesso-a-cidade-2-front.vercel.app/favoritos/${info.id}`;
     try {
       const response = await fetch(url, {
