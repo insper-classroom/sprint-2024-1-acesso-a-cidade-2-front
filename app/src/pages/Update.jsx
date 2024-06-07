@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-import FormSenha from '../components/FormSenha'
+import FormUpdate from '../components/FormUpdate'
 import { Container } from '@mui/material';
 import Header from '../components/Header';
 
-
-function Senha() {
+function Update() {
     return (
         <>
           <Header/>
           <Container maxWidth="sm">
-              <FormSenha />
+              <FormUpdate />
           </Container>
         </>
     );
 }
-export default Senha;;
+export default Update;

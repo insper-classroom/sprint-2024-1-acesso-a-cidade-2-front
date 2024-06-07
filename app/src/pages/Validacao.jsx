@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import FormSenha from '../components/FormSenha'
+import FormValidacao from '../components/FormValidacao'
 import { Container } from '@mui/material';
 import Header from '../components/Header';
 
-
-function Senha() {
+function Validacao() {
     return (
         <>
           <Header/>
           <Container maxWidth="sm">
-              <FormSenha />
+              <FormValidacao />
           </Container>
         </>
     );
 }
-export default Senha;;
+
+export default Validacao;
