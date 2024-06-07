@@ -21,13 +21,13 @@ function Home(){
 
   const images = [
     {
-      url: 'https://imgs.search.brave.com/ZDno8QOXgUfXHIdkiCsPfqG71jxI5gHS_yngR8tnhjk/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9idXJz/dC5zaG9waWZ5Y2Ru/LmNvbS9waG90b3Mv/c2NlbmljLW1vdW50/YWluLWxhbmRzY2Fw/ZS5qcGc_d2lkdGg9/MTAwMCZmb3JtYXQ9/cGpwZyZleGlmPTAm/aXB0Yz0w',
-      title: 'Image 1',
+      url: 'https://imgs.search.brave.com/Ok73ysO0Z9e14KoPlY_jYYKmX-kKHJL_u8nKZA2SpAc/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2l4c3RhdGlj/LmNvbS9tZWRpYS9i/Yjc0NzRfZjIzNGU0/NGIwNzI5NDc2Yjkx/NzkxYTViNmIzY2E2/OWV-bXYyLmpwZy92/MS9maWxsL3dfNDY0/LGhfMzEyLGFsX2Ms/cV84MCx1c21fMC42/Nl8xLjAwXzAuMDEs/ZW5jX2F1dG8vQmli/bGlvdGVjYSUyMENv/bXVuaXQlQzMlQTFy/aWElMjBIZWxpJUMz/JUIzcG9saXMuanBn',
+      title: 'Bliblioteca Comunitária',
       link: 'https://example.com/page1'
     },
     {
-      url: 'https://imgs.search.brave.com/HyjWzwYbB76UQRqJ7Xol7utBBUvGpXBTeHIyugUZsnw/rs:fit:500:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAwLzUwLzEzLzQw/LzM2MF9GXzUwMTM0/MDY5X29FU1pkQXJB/WHUzdmtvaXhUZHRk/QWZ2Uk5qMGZ1Vm1a/LmpwZw',
-      title: 'Image 2',
+      url: 'https://www.fablablivresp.prefeitura.sp.gov.br/sites/default/files/styles/banner_interno_1377x806/public/images/logo-unidade/helip%202.jpg?itok=cwwu7H7_',
+      title: 'Fab Lab Heliópolis',
       link: 'https://example.com/page2'
     },
     {
