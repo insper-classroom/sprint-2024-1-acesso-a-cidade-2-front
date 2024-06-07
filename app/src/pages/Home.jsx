@@ -29,11 +29,6 @@ function Home(){
       url: 'https://www.fablablivresp.prefeitura.sp.gov.br/sites/default/files/styles/banner_interno_1377x806/public/images/logo-unidade/helip%202.jpg?itok=cwwu7H7_',
       title: 'Fab Lab Heliópolis',
       link: 'https://example.com/page2'
-    },
-    {
-      url: 'https://imgs.search.brave.com/QDnhn6ibfZEO7FCWjiQbIwdr2OKIF3WRzW6EbBuF7wc/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9idXJz/dC5zaG9waWZ5Y2Ru/LmNvbS9waG90b3Mv/bmF0dXJlLW1vdW50/YWlucy1yaXZlci1s/YW5kc2NhcGUtYWR2/ZW50dXJlLmpwZz93/aWR0aD0xMDAwJmZv/cm1hdD1wanBnJmV4/aWY9MCZpcHRjPTA',
-      title: 'Image 3',
-      link: 'https://example.com/page3'
     }
   ];
   
