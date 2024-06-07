@@ -192,10 +192,13 @@ const CreateEvent = () => {
                 onChange={handleChange}
                 style={{ borderRadius: '30px' }}
               >
-                <MenuItem value="workshop">Workshop</MenuItem>
-                <MenuItem value="seminar">Seminar</MenuItem>
-                <MenuItem value="conference">Conference</MenuItem>
-                {/* Adicione mais opções conforme necessário */}
+                <MenuItem value="Musica">Musica</MenuItem>
+                <MenuItem value="Esporte">Esporte</MenuItem>
+                <MenuItem value="Cinema e Teatro">Cinema e Teatro</MenuItem>
+                <MenuItem value="Oficina">Oficina</MenuItem>
+                <MenuItem value="Comida / Gastronomia">Comida / Gastronomia</MenuItem>
+                <MenuItem value="Museu">Museu</MenuItem>
+                <MenuItem value="Dança">Dança</MenuItem>
               </Select>
             </FormControl>
             <FormControl fullWidth margin="normal" required>
@@ -209,10 +212,8 @@ const CreateEvent = () => {
                 onChange={handleChange}
                 style={{ borderRadius: '30px' }}
               >
-                <MenuItem value="tecnologia">Tecnologia</MenuItem>
-                <MenuItem value="saude">Saúde</MenuItem>
-                <MenuItem value="educacao">Educação</MenuItem>
-                {/* Adicione mais opções conforme necessário */}
+                <MenuItem value="Dentro de Heliópolis">Dentro de Heliópolis</MenuItem>
+                <MenuItem value="Fora de Heliópolis">Fora de Heliópolis</MenuItem>
               </Select>
             </FormControl>
             <Button
