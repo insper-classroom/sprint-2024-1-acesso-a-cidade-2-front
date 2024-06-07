@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, CssBaseline, Box, TextField, Button, Typography, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import Header from '../components/Header';
+import { useAuth } from '../context/AuthContext';
 
 const CreateEvent = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +18,7 @@ const CreateEvent = () => {
   });
 
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -68,6 +70,7 @@ const CreateEvent = () => {
       if (response.ok) {
         // Sucesso ao criar evento
         console.log('Evento criado com sucesso');
+        Navigate('/')
       } else {
         // Erro ao criar evento
         const errorData = await response.json();
