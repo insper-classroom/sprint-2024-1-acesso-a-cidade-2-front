@@ -22,7 +22,7 @@ const AdminPage = () => {
       try {
         const email = localStorage.getItem('email');
         const senha = localStorage.getItem('senha');
-        const response = await fetch('http://127.0.0.1:5000/login', {
+        const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ const AdminPage = () => {
     setError(null);
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/eventos/pendente', {
+      const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/eventos/pendente', {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -85,7 +85,7 @@ const AdminPage = () => {
   // Função para aprovar evento
   const handleApprove = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/eventos/${selectedEvent._id}/Aprovado`, {
+      const response = await fetch(`https://sprint-2024-1-acesso-a-cidade-2.onrender.com/eventos/${selectedEvent._id}/Aprovado`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -109,7 +109,7 @@ const AdminPage = () => {
   // Função para rejeitar evento
   const handleReject = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/eventos/${selectedEvent._id}/Rejeitado`, {
+      const response = await fetch(`https://sprint-2024-1-acesso-a-cidade-2.onrender.com/eventos/${selectedEvent._id}/Rejeitado`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
