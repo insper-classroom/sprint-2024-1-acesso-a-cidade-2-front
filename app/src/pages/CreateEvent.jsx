@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, CssBaseline, Box, TextField, Button, Typography, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import Header from '../components/Header';
-import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const CreateEvent = () => {
   const [formData, setFormData] = useState({
