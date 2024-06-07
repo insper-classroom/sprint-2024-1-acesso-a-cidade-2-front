@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, CssBaseline, Box, TextField, Button, Typography } from '@mui/material';
+import { Container, CssBaseline, Box, TextField, Button, Typography, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import Header from '../components/Header';
 
 const CreateEvent = () => {
@@ -110,7 +110,6 @@ const CreateEvent = () => {
               InputProps={{
                 style: { borderRadius: '30px'}
               }}
-              
             />
             <TextField
               margin="normal"
@@ -182,30 +181,40 @@ const CreateEvent = () => {
                 style: { borderRadius: '30px'}
               }}
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              label="Tipo de evento"
-              name="tipo"
-              value={formData.tipo}
-              onChange={handleChange}
-              InputProps={{
-                style: { borderRadius: '30px'}
-              }}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              label="Área do evento"
-              name="area"
-              value={formData.area}
-              onChange={handleChange}
-              InputProps={{
-                style: { borderRadius: '30px'}
-              }}
-            />
+            <FormControl fullWidth margin="normal" required>
+              <InputLabel id="tipo-evento-label">Tipo de evento</InputLabel>
+              <Select
+                labelId="tipo-evento-label"
+                id="tipo-evento"
+                name="tipo"
+                value={formData.tipo}
+                label="Tipo de evento"
+                onChange={handleChange}
+                style={{ borderRadius: '30px' }}
+              >
+                <MenuItem value="workshop">Workshop</MenuItem>
+                <MenuItem value="seminar">Seminar</MenuItem>
+                <MenuItem value="conference">Conference</MenuItem>
+                {/* Adicione mais opções conforme necessário */}
+              </Select>
+            </FormControl>
+            <FormControl fullWidth margin="normal" required>
+              <InputLabel id="area-evento-label">Área do evento</InputLabel>
+              <Select
+                labelId="area-evento-label"
+                id="area-evento"
+                name="area"
+                value={formData.area}
+                label="Área do evento"
+                onChange={handleChange}
+                style={{ borderRadius: '30px' }}
+              >
+                <MenuItem value="tecnologia">Tecnologia</MenuItem>
+                <MenuItem value="saude">Saúde</MenuItem>
+                <MenuItem value="educacao">Educação</MenuItem>
+                {/* Adicione mais opções conforme necessário */}
+              </Select>
+            </FormControl>
             <Button
               variant="contained"
               component="label"
