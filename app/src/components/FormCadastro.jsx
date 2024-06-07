@@ -42,7 +42,7 @@ const FormCadastro = () => {
         const tempErrors = validate();
         if (Object.keys(tempErrors).length === 0) {
             try {
-                const response = await fetch('http://127.0.0.1:5000/usuarios', {
+                const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/usuarios', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

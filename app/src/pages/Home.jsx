@@ -53,7 +53,7 @@ function Home(){
 
     try {
       console.log(filters)
-      const url = filters ? 'http://127.0.0.1:5000/eventos/filtros' : 'http://127.0.0.1:5000/eventos';
+      const url = filters ? 'https://sprint-2024-1-acesso-a-cidade-2.onrender.com/eventos/filtros' : 'https://sprint-2024-1-acesso-a-cidade-2.onrender.com/eventos';
       const options = filters
         ? {
             method: 'POST',
@@ -102,7 +102,7 @@ function Home(){
           <Evento onImageClick={handleClickOpen}
             key={event._id}
             info={{
-              image: 'http://127.0.0.1:5000'+ event.imagem,
+              image: 'https://sprint-2024-1-acesso-a-cidade-2.onrender.com'+ event.imagem,
               title: event.titulo,
               description: event.descricao,
               date: event.data,

@@ -24,7 +24,7 @@ export default function Evento({ info, onImageClick, onFavoriteClick }) {
     }
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/eventos/${info.id}/favorito`, {
+      const response = await fetch(`https://sprint-2024-1-acesso-a-cidade-2.onrender.com/eventos/${info.id}/favorito`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ export default function Evento({ info, onImageClick, onFavoriteClick }) {
     }
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/favoritos/${info.id}`, {
+      const response = await fetch(`/favoritos/${info.id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

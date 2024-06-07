@@ -55,7 +55,7 @@ const CreateEvent = () => {
 
     try {
 
-      const response = await fetch('http://127.0.0.1:5000/eventos', {
+      const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/eventos', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
