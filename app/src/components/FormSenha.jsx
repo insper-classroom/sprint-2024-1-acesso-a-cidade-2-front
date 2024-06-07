@@ -32,7 +32,7 @@ const FormSenha = () => {
         const tempErrors = validate();
         if (Object.keys(tempErrors).length === 0) {
             try {
-                const response = await fetch('http://127.0.0.1:5000/atualizar-senha', {
+                const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/atualizar-senha', {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
