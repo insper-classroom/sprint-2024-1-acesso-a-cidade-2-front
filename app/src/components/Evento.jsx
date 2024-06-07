@@ -19,7 +19,7 @@ export default function Evento({ info, onImageClick, onFavoriteClick }) {
         return;
       }
       try {
-        const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/favorito', {
+        const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/favoritos', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
