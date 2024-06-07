@@ -38,9 +38,9 @@ Para obter uma cópia local e executá-la, siga estes passos simples.
     ```
 
 ## Uso
-Para iniciar o servidor de desenvolvimento, execute:
+Para iniciar, execute:
 ```sh
-npm start
+npm run dev
 ```
 
 ## Estrutura do código
@@ -74,7 +74,24 @@ O componente principal da aplicação que configura as rotas e renderiza os comp
 ### 'index.js'
 O ponto de entrada da aplicação onde o React é inicializado e o componente App é renderizado na DOM.
 
-Este projeto foi feito por alunos do 3SEM de Ciências da Computação no INSPER.
+## Diagrama da Arquitetura do Projeto
+
+ ![Imagem diagrama](diagrama.jpeg)
+
+
+## Backlog e Slides
+
+[Projects Github](https://github.com/orgs/insper-classroom/projects/159/views/1)
+
+[Slides](https://www.canva.com/design/DAGHXZyfqKQ/uEl6205QwkIEYVR2smDNqA/edit?utm_content=DAGHXZyfqKQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
+## Developers
+
+- [Esther Caroline](https://github.com/esthercaroline)
+- [Caio Liberal](https://github.com/Caiolib)
+- [Gabriel Rodrigues](https://github.com/rxdrigues)
+- [Nina Savoy](https://github.com/ninasavoy)
+- [Mateus Moreira](https://github.com/mmp052)
 
 
 
