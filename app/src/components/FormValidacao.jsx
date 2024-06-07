@@ -10,7 +10,7 @@ function TokenValidation() {
   useEffect(() => {
     const validateToken = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/atualizar-senha', { params: { token } });
+        const response = await axios.get('https://sprint-2024-1-acesso-a-cidade-2-front.vercel.app/atualizar-senha', { params: { token } });
         setMessage(response.data.mensagem);
       } catch (error) {
         setMessage('Error: ' + error.response.data.mensagem);

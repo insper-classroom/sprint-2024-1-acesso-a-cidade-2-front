@@ -42,7 +42,7 @@ const FormCadastro = () => {
         const tempErrors = validate();
         if (Object.keys(tempErrors).length === 0) {
             try {
-                const response = await fetch('http://127.0.0.1:5000/usuarios', {
+                const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/usuarios', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -91,9 +91,9 @@ const FormCadastro = () => {
                 error={!!errors.name}
                 helperText={errors.name}
                 variant="outlined"
-                sx={{ marginBottom: 2, borderRadius: '16px' }}
+                sx={{ marginBottom: 2}}
                 InputProps={{
-                    style: { borderRadius: '16px' }
+                    style: { borderRadius: '30px', textAlign: 'center'}
                 }}
             />
             <TextField
@@ -104,9 +104,9 @@ const FormCadastro = () => {
                 error={!!errors.cpf}
                 helperText={errors.cpf}
                 variant="outlined"
-                sx={{ marginBottom: 2, borderRadius: '16px' }}
+                sx={{ marginBottom: 2}}
                 InputProps={{
-                    style: { borderRadius: '16px' }
+                    style: { borderRadius: '30px' }
                 }}
             />
             <TextField
@@ -118,9 +118,9 @@ const FormCadastro = () => {
                 error={!!errors.email}
                 helperText={errors.email}
                 variant="outlined"
-                sx={{ marginBottom: 2, borderRadius: '16px' }}
+                sx={{ marginBottom: 2}}
                 InputProps={{
-                    style: { borderRadius: '16px' }
+                    style: { borderRadius: '30px' }
                 }}
             />
             <TextField
@@ -132,9 +132,9 @@ const FormCadastro = () => {
                 error={!!errors.email2}
                 helperText={errors.email2}
                 variant="outlined"
-                sx={{ marginBottom: 2, borderRadius: '16px' }}
+                sx={{ marginBottom: 2}}
                 InputProps={{
-                    style: { borderRadius: '16px' }
+                    style: { borderRadius: '30px' }
                 }}
             />
             <TextField
@@ -146,9 +146,9 @@ const FormCadastro = () => {
                 error={!!errors.senha}
                 helperText={errors.senha}
                 variant="outlined"
-                sx={{ marginBottom: 2, borderRadius: '16px' }}
+                sx={{ marginBottom: 2}}
                 InputProps={{
-                    style: { borderRadius: '16px' }
+                    style: { borderRadius: '30px' }
                 }}
             />
             <TextField
@@ -160,9 +160,9 @@ const FormCadastro = () => {
                 error={!!errors.senha2}
                 helperText={errors.senha2}
                 variant="outlined"
-                sx={{ marginBottom: 2, borderRadius: '16px' }}
+                sx={{ marginBottom: 2}}
                 InputProps={{
-                    style: { borderRadius: '16px' }
+                    style: { borderRadius: '30px' }
                 }}
             />
             <Button variant="contained" color="primary" type="submit">

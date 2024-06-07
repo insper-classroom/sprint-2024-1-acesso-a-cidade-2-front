@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, CssBaseline, Box, TextField, Button, Typography } from '@mui/material';
+import { Container, CssBaseline, Box, TextField, Button, Typography, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import Header from '../components/Header';
 
 const CreateEvent = () => {
@@ -12,7 +12,7 @@ const CreateEvent = () => {
     horario: '',
     tipo: '',
     area: '',
-    status: 'Aprovado',
+    status: 'Pendente',
     imagem: null
   });
 
@@ -55,7 +55,7 @@ const CreateEvent = () => {
 
     try {
 
-      const response = await fetch('http://127.0.0.1:5000/eventos', {
+      const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/eventos', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -107,6 +107,9 @@ const CreateEvent = () => {
               autoFocus
               value={formData.titulo}
               onChange={handleChange}
+              InputProps={{
+                style: { borderRadius: '30px'}
+              }}
             />
             <TextField
               margin="normal"
@@ -118,6 +121,9 @@ const CreateEvent = () => {
               rows={4}
               value={formData.descricao}
               onChange={handleChange}
+              InputProps={{
+                style: { borderRadius: '30px'}
+              }}
             />
             <TextField
               margin="normal"
@@ -127,6 +133,9 @@ const CreateEvent = () => {
               name="valor"
               value={formData.valor}
               onChange={handleChange}
+              InputProps={{
+                style: { borderRadius: '30px'}
+              }}
             />
             <TextField
               margin="normal"
@@ -140,6 +149,9 @@ const CreateEvent = () => {
               }}
               value={formData.data}
               onChange={handleChange}
+              InputProps={{
+                style: { borderRadius: '30px'}
+              }}
             />
             <TextField
               margin="normal"
@@ -149,6 +161,9 @@ const CreateEvent = () => {
               name="local"
               value={formData.local}
               onChange={handleChange}
+              InputProps={{
+                style: { borderRadius: '30px'}
+              }}
             />
             <TextField
               margin="normal"
@@ -162,30 +177,50 @@ const CreateEvent = () => {
               }}
               value={formData.horario}
               onChange={handleChange}
+              InputProps={{
+                style: { borderRadius: '30px'}
+              }}
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              label="Tipo de evento"
-              name="tipo"
-              value={formData.tipo}
-              onChange={handleChange}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              label="Área do evento"
-              name="area"
-              value={formData.area}
-              onChange={handleChange}
-            />
+            <FormControl fullWidth margin="normal" required>
+              <InputLabel id="tipo-evento-label">Tipo de evento</InputLabel>
+              <Select
+                labelId="tipo-evento-label"
+                id="tipo-evento"
+                name="tipo"
+                value={formData.tipo}
+                label="Tipo de evento"
+                onChange={handleChange}
+                style={{ borderRadius: '30px' }}
+              >
+                <MenuItem value="Musica">Musica</MenuItem>
+                <MenuItem value="Esporte">Esporte</MenuItem>
+                <MenuItem value="Cinema e Teatro">Cinema e Teatro</MenuItem>
+                <MenuItem value="Oficina">Oficina</MenuItem>
+                <MenuItem value="Comida / Gastronomia">Comida / Gastronomia</MenuItem>
+                <MenuItem value="Museu">Museu</MenuItem>
+                <MenuItem value="Dança">Dança</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl fullWidth margin="normal" required>
+              <InputLabel id="area-evento-label">Área do evento</InputLabel>
+              <Select
+                labelId="area-evento-label"
+                id="area-evento"
+                name="area"
+                value={formData.area}
+                label="Área do evento"
+                onChange={handleChange}
+                style={{ borderRadius: '30px' }}
+              >
+                <MenuItem value="Dentro de Heliópolis">Dentro de Heliópolis</MenuItem>
+                <MenuItem value="Fora de Heliópolis">Fora de Heliópolis</MenuItem>
+              </Select>
+            </FormControl>
             <Button
               variant="contained"
               component="label"
               fullWidth
-              sx={{ mt: 2 }}
+              sx={{ mt: 2, borderRadius: '30px', color: 'white', backgroundColor: '#3f51b5'}}
             >
               Upload Imagem
               <input
@@ -199,7 +234,7 @@ const CreateEvent = () => {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 4, mb: 2, borderRadius: '30px'}}
             >
               Cadastrar Evento
             </Button>

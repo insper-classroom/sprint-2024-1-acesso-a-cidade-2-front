@@ -59,7 +59,7 @@ function Header() {
             component='img'
             src='/assets/UNAS.png'
             alt='logo'
-            sx={{width: 75, height: 75, margin: 1, mr: 2}}
+            sx={{width: 70, height: 75, margin: 1, mr: 2}}
           />
           <Typography
             variant="h5"
@@ -71,8 +71,8 @@ function Header() {
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
               fontFamily: 'monospace',
-              fontWeight: 70,
-              letterSpacing: '.1rem',
+              fontSize: '1.2rem',
+              letterSpacing: '.05rem',
               color: 'inherit',
               textDecoration: 'none',
             }}

@@ -11,7 +11,7 @@ function UpdatePassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put('http://localhost:5000/atualizar-senha', { token, senha: password });
+      const response = await axios.put('https://sprint-2024-1-acesso-a-cidade-2-front.vercel.app/atualizar-senha', { token, senha: password });
       setMessage(response.data.message);
     } catch (error) {
       setMessage('Error: ' + error.response.data.message);
