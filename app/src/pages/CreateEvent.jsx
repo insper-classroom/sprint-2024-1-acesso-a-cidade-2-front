@@ -107,6 +107,10 @@ const CreateEvent = () => {
               autoFocus
               value={formData.titulo}
               onChange={handleChange}
+              InputProps={{
+                style: { borderRadius: '30px'}
+              }}
+              
             />
             <TextField
               margin="normal"
@@ -118,6 +122,9 @@ const CreateEvent = () => {
               rows={4}
               value={formData.descricao}
               onChange={handleChange}
+              InputProps={{
+                style: { borderRadius: '30px'}
+              }}
             />
             <TextField
               margin="normal"
@@ -127,6 +134,9 @@ const CreateEvent = () => {
               name="valor"
               value={formData.valor}
               onChange={handleChange}
+              InputProps={{
+                style: { borderRadius: '30px'}
+              }}
             />
             <TextField
               margin="normal"
@@ -140,6 +150,9 @@ const CreateEvent = () => {
               }}
               value={formData.data}
               onChange={handleChange}
+              InputProps={{
+                style: { borderRadius: '30px'}
+              }}
             />
             <TextField
               margin="normal"
@@ -149,6 +162,9 @@ const CreateEvent = () => {
               name="local"
               value={formData.local}
               onChange={handleChange}
+              InputProps={{
+                style: { borderRadius: '30px'}
+              }}
             />
             <TextField
               margin="normal"
@@ -162,6 +178,9 @@ const CreateEvent = () => {
               }}
               value={formData.horario}
               onChange={handleChange}
+              InputProps={{
+                style: { borderRadius: '30px'}
+              }}
             />
             <TextField
               margin="normal"
@@ -171,6 +190,9 @@ const CreateEvent = () => {
               name="tipo"
               value={formData.tipo}
               onChange={handleChange}
+              InputProps={{
+                style: { borderRadius: '30px'}
+              }}
             />
             <TextField
               margin="normal"
@@ -180,12 +202,15 @@ const CreateEvent = () => {
               name="area"
               value={formData.area}
               onChange={handleChange}
+              InputProps={{
+                style: { borderRadius: '30px'}
+              }}
             />
             <Button
               variant="contained"
               component="label"
               fullWidth
-              sx={{ mt: 2 }}
+              sx={{ mt: 2, borderRadius: '30px', color: 'white', backgroundColor: '#3f51b5'}}
             >
               Upload Imagem
               <input
@@ -199,7 +224,7 @@ const CreateEvent = () => {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 4, mb: 2, borderRadius: '30px'}}
             >
               Cadastrar Evento
             </Button>

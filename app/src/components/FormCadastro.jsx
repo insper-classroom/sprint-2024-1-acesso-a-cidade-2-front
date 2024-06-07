@@ -91,9 +91,9 @@ const FormCadastro = () => {
                 error={!!errors.name}
                 helperText={errors.name}
                 variant="outlined"
-                sx={{ marginBottom: 2, borderRadius: '16px' }}
+                sx={{ marginBottom: 2}}
                 InputProps={{
-                    style: { borderRadius: '16px' }
+                    style: { borderRadius: '30px', textAlign: 'center'}
                 }}
             />
             <TextField
@@ -104,9 +104,9 @@ const FormCadastro = () => {
                 error={!!errors.cpf}
                 helperText={errors.cpf}
                 variant="outlined"
-                sx={{ marginBottom: 2, borderRadius: '16px' }}
+                sx={{ marginBottom: 2}}
                 InputProps={{
-                    style: { borderRadius: '16px' }
+                    style: { borderRadius: '30px' }
                 }}
             />
             <TextField
@@ -118,9 +118,9 @@ const FormCadastro = () => {
                 error={!!errors.email}
                 helperText={errors.email}
                 variant="outlined"
-                sx={{ marginBottom: 2, borderRadius: '16px' }}
+                sx={{ marginBottom: 2}}
                 InputProps={{
-                    style: { borderRadius: '16px' }
+                    style: { borderRadius: '30px' }
                 }}
             />
             <TextField
@@ -132,9 +132,9 @@ const FormCadastro = () => {
                 error={!!errors.email2}
                 helperText={errors.email2}
                 variant="outlined"
-                sx={{ marginBottom: 2, borderRadius: '16px' }}
+                sx={{ marginBottom: 2}}
                 InputProps={{
-                    style: { borderRadius: '16px' }
+                    style: { borderRadius: '30px' }
                 }}
             />
             <TextField
@@ -146,9 +146,9 @@ const FormCadastro = () => {
                 error={!!errors.senha}
                 helperText={errors.senha}
                 variant="outlined"
-                sx={{ marginBottom: 2, borderRadius: '16px' }}
+                sx={{ marginBottom: 2}}
                 InputProps={{
-                    style: { borderRadius: '16px' }
+                    style: { borderRadius: '30px' }
                 }}
             />
             <TextField
@@ -160,9 +160,9 @@ const FormCadastro = () => {
                 error={!!errors.senha2}
                 helperText={errors.senha2}
                 variant="outlined"
-                sx={{ marginBottom: 2, borderRadius: '16px' }}
+                sx={{ marginBottom: 2}}
                 InputProps={{
-                    style: { borderRadius: '16px' }
+                    style: { borderRadius: '30px' }
                 }}
             />
             <Button variant="contained" color="primary" type="submit">

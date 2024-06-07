@@ -56,7 +56,10 @@ function Login() {
         }}
       >
         {error && <Alert severity="error">{error}</Alert>}
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Typography variant="h4" gutterBottom>
+                Login
+            </Typography>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 2 }}>
           <TextField
             margin="normal"
             required
@@ -68,6 +71,9 @@ function Login() {
             autoFocus
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            InputProps={{
+              style: { borderRadius: '30px' }
+            }}
           />
           <TextField
             margin="normal"
@@ -80,12 +86,15 @@ function Login() {
             autoComplete="current-senha"
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
+            InputProps={{
+              style: { borderRadius: '30px' }
+            }}
           />
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2, borderRadius: '30px'}}
           >
             Entrar
           </Button>
