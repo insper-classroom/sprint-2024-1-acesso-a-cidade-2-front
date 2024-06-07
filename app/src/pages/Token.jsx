@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import FormCadastro from '../components/FormCadastro'
+import FormToken from '../components/FormToken'
 import { Container } from '@mui/material';
 import Header from '../components/Header';
 
-function Cadastro() {
+function Token() {
     return (
         <>
           <Header/>
           <Container maxWidth="sm">
-              <FormCadastro />
+              <FormToken />
           </Container>
         </>
     );
 }
 
-export default Cadastro;
+export default Token;
