@@ -87,7 +87,7 @@ export default function Evento({ info, onImageClick, onFavoriteClick }) {
 
   return (
     <Box sx={{ padding: 1 }}>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 545 }}>
         <CardActionArea onClick={() => onImageClick(info)}>
           {info.image ? (
             <CardMedia

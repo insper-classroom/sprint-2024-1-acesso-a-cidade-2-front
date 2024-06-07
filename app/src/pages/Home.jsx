@@ -109,6 +109,7 @@ function Home(){
               location: event.local,
               horario: event.horario,
               id : event._id
+              
             }}
           />
         ))}
@@ -146,8 +147,8 @@ function Filtros({ onApplyFilters }) {
   return (
     <Filtro
       Nome={'Filtros'}
-      corFundo={'#1976D2'}
-      corTexto={'white'}
+      corFundo={'#f5f5f5'}
+      corTexto={'black'}
       conteudo={
         <>
           <Filtro Nome='Preço' corTexto={'#757575'} conteudo={<RangeSlider value={priceRange} onChange={(_, newValue) => setPriceRange(newValue)} />} />
