@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -10,11 +9,40 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Box from '@mui/material/Box';
 
 export default function Evento({ info, onImageClick, onFavoriteClick }) {
-  const [isFavorited, setIsFavorited] = useState(info.isFavorited);
+  const [isFavorited, setIsFavorited] = useState(false);
 
   useEffect(() => {
-    setIsFavorited(info.isFavorited);
-  }, [info.isFavorited]);
+<<<<<<< Favoritos
+    const fetchFavoritedEvents = async () => {
+      const token = localStorage.getItem('jwtToken');
+      if (!token) {
+        console.error('Token não encontrado. Faça login novamente.');
+        return;
+      }
+      try {
+        const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/eventos/${info.id}/favorito', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          const favoritedEventIds = data.eventos;
+          console.log('Favorited events:', favoritedEventIds);
+          if (favoritedEventIds.includes(info.id)) {
+            setIsFavorited(true);
+          }
+        } else {
+          console.error('Erro ao buscar eventos favoritados');
+        }
+      } catch (error) {
+        console.error('Erro ao tentar buscar eventos favoritados:', error);
+      }
+    };
+    fetchFavoritedEvents();
+  }, [info.id]);
 
   const handleFavoriteClick = async () => {
     const token = localStorage.getItem('jwtToken');
@@ -22,67 +50,37 @@ export default function Evento({ info, onImageClick, onFavoriteClick }) {
       console.error('Token não encontrado. Faça login novamente.');
       return;
     }
-
+    const method = isFavorited ? 'DELETE' : 'POST'; // Determine the method based on the current favorite state
+    const url = `http://127.0.0.1:5000/favoritos/${info.id}`;
     try {
-      const response = await fetch(`https://sprint-2024-1-acesso-a-cidade-2.onrender.com/eventos/${info.id}/favorito`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-
-      if (response.ok) {
-        console.log(token)
-        console.log(`Evento ${info.id} favoritado com sucesso.`);
-        setIsFavorited(true);
-        if (onFavoriteClick) {
-          onFavoriteClick(info);
-        }
-      } else {
-        console.error('Erro ao favoritar o evento');
-      }
-    } catch (error) {
-      console.error('Erro ao tentar favoritar o evento:', error);
-    }
-  };
-
-  const handleUnfavoriteClick = async () => {
-    const token = localStorage.getItem('jwtToken');
-    if (!token) {
-      console.error('Token não encontrado. Faça login novamente.');
-      return;
-    }
-
-    try {
+<<<<<<< Favoritos
+      const response = await fetch(url, {
+        method: method,
+=======
       const response = await fetch(`/favoritos/${info.id}`, {
         method: 'DELETE',
+>>>>>>> main
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
       });
-
       if (response.ok) {
-        console.log(`Evento ${info.id} desfavoritado com sucesso.`);
-        setIsFavorited(false);
+        console.log(`Evento ${info.id} ${isFavorited ? 'desfavoritado' : 'favoritado'} com sucesso.`);
+        setIsFavorited(!isFavorited); // Toggle the favorite state
         if (onFavoriteClick) {
           onFavoriteClick(info);
         }
       } else {
-        console.error('Erro ao desfavoritar o evento');
+        console.error(`Erro ao ${isFavorited ? 'desfavoritar' : 'favoritar'} o evento`);
       }
     } catch (error) {
-      console.error('Erro ao tentar desfavoritar o evento:', error);
+      console.error(`Erro ao tentar ${isFavorited ? 'desfavoritar' : 'favoritar'} o evento:`, error);
     }
   };
 
   const handleClick = () => {
-    if (isFavorited) {
-      handleUnfavoriteClick();
-    } else {
-      handleFavoriteClick();
-    }
+    handleFavoriteGetClick();
   };
 
   return (
@@ -90,14 +88,8 @@ export default function Evento({ info, onImageClick, onFavoriteClick }) {
       <Card sx={{ maxWidth: 545 }}>
         <CardActionArea onClick={() => onImageClick(info)}>
           {info.image ? (
-            <CardMedia
-              component="img"
-              height="140"
-              image={info.image}
-              alt="evento"
-            />
+            <CardMedia component="img" height="140" image={info.image} alt="evento" />
           ) : null}
-
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               {info.title}
@@ -109,11 +101,7 @@ export default function Evento({ info, onImageClick, onFavoriteClick }) {
         </CardActionArea>
         <CardActions>
           <Tooltip title="Favoritar">
-            <IconButton
-              aria-label="favoritar"
-              onClick={handleClick}
-              sx={{ color: isFavorited ? 'red' : 'default' }}
-            >
+            <IconButton aria-label="favoritar" onClick={handleFavoriteClick} sx={{ color: isFavorited ? 'red' : 'default' }}>
               <FavoriteIcon />
             </IconButton>
           </Tooltip>
