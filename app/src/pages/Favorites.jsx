@@ -31,7 +31,7 @@ function Favorites() {
             }
 
             try {
-                const response = await fetch('http://127.0.0.1:5000/favoritos', {
+                const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/favoritos', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -69,7 +69,7 @@ function Favorites() {
                 const eventsDetails = await Promise.all(validEventIDs.map(async id => {
                     console.log('Fetching details for event ID:', id);  // Registrar cada ID de evento sendo buscado
                     if (id && typeof id === 'string' && id !== 'undefined') {
-                        const response = await fetch(`http://127.0.0.1:5000/eventos/${id}`, {
+                        const response = await fetch(`https://sprint-2024-1-acesso-a-cidade-2.onrender.com/favoritos/${id}`, {
                             method: 'GET',
                             headers: {
                                 'Authorization': `Bearer ${token}`,

@@ -12,6 +12,7 @@ export default function Evento({ info, onImageClick, onFavoriteClick }) {
   const [isFavorited, setIsFavorited] = useState(false);
 
   useEffect(() => {
+<<<<<<< Favoritos
     const fetchFavoritedEvents = async () => {
       const token = localStorage.getItem('jwtToken');
       if (!token) {
@@ -19,7 +20,7 @@ export default function Evento({ info, onImageClick, onFavoriteClick }) {
         return;
       }
       try {
-        const response = await fetch('http://127.0.0.1:5000/favoritos', {
+        const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/eventos/${info.id}/favorito', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -52,8 +53,13 @@ export default function Evento({ info, onImageClick, onFavoriteClick }) {
     const method = isFavorited ? 'DELETE' : 'POST'; // Determine the method based on the current favorite state
     const url = `http://127.0.0.1:5000/favoritos/${info.id}`;
     try {
+<<<<<<< Favoritos
       const response = await fetch(url, {
         method: method,
+=======
+      const response = await fetch(`/favoritos/${info.id}`, {
+        method: 'DELETE',
+>>>>>>> main
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
@@ -79,7 +85,7 @@ export default function Evento({ info, onImageClick, onFavoriteClick }) {
 
   return (
     <Box sx={{ padding: 1 }}>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 545 }}>
         <CardActionArea onClick={() => onImageClick(info)}>
           {info.image ? (
             <CardMedia component="img" height="140" image={info.image} alt="evento" />

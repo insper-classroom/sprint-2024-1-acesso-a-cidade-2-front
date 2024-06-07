@@ -10,16 +10,13 @@ function Login() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { login } = useAuth();
-  const saveToken = (token) => {
-    localStorage.setItem('jwtToken', token);
-  };  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError(null);
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/login', {
+      const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,9 +26,14 @@ function Login() {
 
       const data = await response.json();
       if (response.status == 200) {
-        saveToken(data.token);
-        login();
-        navigate('/');
+        login(data.token);
+        localStorage.setItem("email", email);
+        localStorage.setItem("senha", senha);
+        if(data.admin){
+          navigate('/admin');
+        } else{
+          navigate('/');
+        }
       } else {
         setError('Credenciais inválidas. Por favor, tente novamente.');
       }

@@ -11,12 +11,17 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-
-const settings = ['Login', 'Cadastro', 'Favoritos', 'Perfil', 'Admin'];
+import { useAuth } from '../context/AuthContext';
 
 function Header() {
+  const { logout } = useAuth();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
+
+  const token = localStorage.getItem('jwtToken');
+  const settings = token == null 
+    ? ['Login', 'Cadastro', 'Cadastrar evento', 'Favoritos'] 
+    : ['Cadastrar evento', 'Favoritos', 'Logout'];
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -38,6 +43,11 @@ function Header() {
       navigate('/perfil');
     } else if (page === 'Cadastro') {
       navigate('/cadastro');
+    } else if (page === 'Cadastrar evento') {
+      navigate('/create-event');
+    } else if (page === 'Logout') {
+      logout()
+      navigate('/');
     }
   };
 
@@ -45,25 +55,12 @@ function Header() {
     <AppBar position="static" sx={{width: '100%'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <Box
+            component='img'
+            src='/assets/UNAS.png'
+            alt='logo'
+            sx={{width: 75, height: 75, margin: 1, mr: 2}}
+          />
           <Typography
             variant="h5"
             noWrap
@@ -74,13 +71,13 @@ function Header() {
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
               fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
+              fontWeight: 70,
+              letterSpacing: '.1rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            LOGO
+            HelipaCultural
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -97,7 +94,7 @@ function Header() {
 
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
-              size="large"
+              size= 'large'
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"

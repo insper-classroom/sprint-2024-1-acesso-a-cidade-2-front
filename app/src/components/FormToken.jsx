@@ -2,17 +2,13 @@ import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, Alert} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const FormCadastro = () => {
+const FormToken = () => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-        nome: '',
-        cpf: '',
         email: '',
-        email2: '',
-        senha: '',
-        senha2: ''
+        token: ''
     });
     const [errors, setErrors] = useState({});
 
@@ -25,15 +21,8 @@ const FormCadastro = () => {
 
     const validate = () => {
         let tempErrors = {};
-        if (!formData.nome) tempErrors.name = 'Nome é obrigatório';
         if (!formData.email) tempErrors.email = 'Email é obrigatório';
-        if (!formData.email2) tempErrors.email2 = 'Email de confirmação é obrigatório';
-        if (formData.email !== formData.email2) tempErrors.email2 = 'Emails não são iguais';
-        if (!formData.senha) tempErrors.senha = 'Senha é obrigatória';
-        if (!formData.senha2) tempErrors.senha2 = 'Senha de confirmação é obrigatória';
-        if (formData.senha !== formData.senha2) tempErrors.senha2 = 'Senhas não são iguais';
-        if (!formData.cpf) tempErrors.cpf = 'CPF é obrigatório';
-        else if (!/^\d{11}$/.test(formData.cpf)) tempErrors.cpf = 'CPF tem que ter 11 dígitos';
+        if (!formData.token) tempErrors.token = 'Token é obrigatória';
         return tempErrors;
     };
 
@@ -42,7 +31,7 @@ const FormCadastro = () => {
         const tempErrors = validate();
         if (Object.keys(tempErrors).length === 0) {
             try {
-                const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/usuarios', {
+                const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/atualizar-senha', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -57,7 +46,7 @@ const FormCadastro = () => {
 
                 const data = await response.json();
                 console.log('Form data submitted successfully:', data);
-                navigate('/login');
+                navigate('/');
             } catch (error) {
                 console.error('Erro ao enviar os dados:', error);
             }
@@ -84,32 +73,6 @@ const FormCadastro = () => {
             </Typography>
             {error && <Alert severity="error">{error}</Alert>}
             <TextField
-                label="Nome"
-                name="nome"
-                value={formData.name}
-                onChange={handleChange}
-                error={!!errors.name}
-                helperText={errors.name}
-                variant="outlined"
-                sx={{ marginBottom: 2, borderRadius: '16px' }}
-                InputProps={{
-                    style: { borderRadius: '16px' }
-                }}
-            />
-            <TextField
-                label="CPF"
-                name="cpf"
-                value={formData.cpf}
-                onChange={handleChange}
-                error={!!errors.cpf}
-                helperText={errors.cpf}
-                variant="outlined"
-                sx={{ marginBottom: 2, borderRadius: '16px' }}
-                InputProps={{
-                    style: { borderRadius: '16px' }
-                }}
-            />
-            <TextField
                 label="E-mail"
                 name="email"
                 type="email"
@@ -124,47 +87,20 @@ const FormCadastro = () => {
                 }}
             />
             <TextField
-                label="Confirme seu e-mail"
-                name="email2"
-                type="email"
-                value={formData.email2}
-                onChange={handleChange}
-                error={!!errors.email2}
-                helperText={errors.email2}
-                variant="outlined"
-                sx={{ marginBottom: 2, borderRadius: '16px' }}
-                InputProps={{
-                    style: { borderRadius: '16px' }
-                }}
-            />
-            <TextField
-                label="Senha"
-                name="senha"
+                label="Token"
+                name="token"
                 type="password"
-                value={formData.senha}
+                value={formData.password}
                 onChange={handleChange}
-                error={!!errors.senha}
-                helperText={errors.senha}
+                error={!!errors.password}
+                helperText={errors.password}
                 variant="outlined"
                 sx={{ marginBottom: 2, borderRadius: '16px' }}
                 InputProps={{
                     style: { borderRadius: '16px' }
                 }}
             />
-            <TextField
-                label="Confirme sua senha"
-                name="senha2"
-                type="password"
-                value={formData.senha2}
-                onChange={handleChange}
-                error={!!errors.senha2}
-                helperText={errors.senha2}
-                variant="outlined"
-                sx={{ marginBottom: 2, borderRadius: '16px' }}
-                InputProps={{
-                    style: { borderRadius: '16px' }
-                }}
-            />
+
             <Button variant="contained" color="primary" type="submit">
                 Enviar
             </Button>
@@ -172,4 +108,4 @@ const FormCadastro = () => {
     );
 };
 
-export default FormCadastro;
+export default FormToken;

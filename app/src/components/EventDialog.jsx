@@ -6,12 +6,12 @@ const EventDialog = ({ event, open, onClose }) => {
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>{event?.title}</DialogTitle>
       <DialogContent>
-        <Card>
+        <Card sx = {{borderRadius: 5}}>
           <CardMedia
             component="img"
             height="200"
-            image={event?.url}
-            alt={event?.title}
+            image={event?.image}
+            alt={event?.title}            
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
@@ -19,19 +19,19 @@ const EventDialog = ({ event, open, onClose }) => {
             <Typography variant="body2" color="text.secondary">
             </Typography>
             <Box mt={2}>
-              <Typography variant="body1">
+              <Typography variant="body1" marginTop={1} justifyContent="center" display="flex">
                 Data: {event?.date}
               </Typography>
-              <Typography variant="body1">
+              <Typography variant="body1" marginTop={1} justifyContent="center" display="flex">
                 Horário: {event?.horario}
               </Typography>
-              <Typography variant="body1">
+              <Typography variant="body1" marginTop={1} justifyContent="center" display="flex">
                 Local: {event?.location}
               </Typography>
 
             </Box>
-              <Typography variant="body1">
-                Descrição: {event?.description}
+              <Typography variant="body1" marginTop={2}>
+               {event?.description}
               </Typography>
           </CardContent>
         </Card>

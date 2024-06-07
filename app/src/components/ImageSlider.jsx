@@ -16,7 +16,7 @@ const ImageSlider = ({ images, onImageClick }) => {
     <Slider {...settings}>
       {images.map((image, index) => (
         <div key={index} className="image-slide" onClick={() => onImageClick(image)} style={{ cursor: 'pointer' }}>
-            <img src={image.url} alt={image.title} style={{ width: '100%', height: '200px' }} />
+            <img src={image.url} alt={image.title} style={{ width: '100%', height: '200px', borderRadius: 20}} />
             <div className="image-title">{image.title}</div>
         </div>
       ))}

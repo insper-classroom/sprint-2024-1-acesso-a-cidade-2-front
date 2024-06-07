@@ -3,17 +3,18 @@ import Container from '@mui/material/Container';
 import Header from '../components/Header';
 import Filtro from '../components/Filtro';
 import DataPicker from '../components/DataPicker';
-import CheckBox from '../components/CheckBox';
 import RangeSlider from '../components/RangeSlider';
-import HoraPicker from '../components/HoraPicker';
 import Evento from '../components/Evento';
 import ImageSlider from '../components/ImageSlider';
 import EventDialog from '../components/EventDialog';
 import Button from '@mui/material/Button';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Radio from '@mui/material/Radio';
 
 function Home(){
-  const [selectedEvent, setSelectedEvent] = React.useState(null);
-  const [open, setOpen] = React.useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [open, setOpen] = useState(false);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -35,6 +36,7 @@ function Home(){
       link: 'https://example.com/page3'
     }
   ];
+  
   const handleClickOpen = (event) => {
     setSelectedEvent(event);
     setOpen(true);
@@ -44,14 +46,15 @@ function Home(){
     setOpen(false);
     setSelectedEvent(null);
   }
+  
   const fetchEvents = async (filters = null) => {
     setLoading(true);
     setError(null);
 
     try {
-      const url = filters ? 'http://127.0.0.1:5000/filtros' : 'http://127.0.0.1:5000/eventos';
-      const options = filters
       console.log(filters)
+      const url = filters ? 'https://sprint-2024-1-acesso-a-cidade-2.onrender.com/eventos/filtros' : 'https://sprint-2024-1-acesso-a-cidade-2.onrender.com/eventos';
+      const options = filters
         ? {
             method: 'POST',
             headers: {
@@ -89,23 +92,24 @@ function Home(){
     <>
       <Header />
       <Container maxWidth="sm" sx={{ mt: 5 }}>
-        <ImageSlider images={images} onImageClick={handleClickOpen} />
+        <ImageSlider images={images} onImageClick={handleClickOpen}/>
       </Container>
       <Container maxWidth="sm" sx={{ mt: 5 }}>
         <Filtros onApplyFilters={handleApplyFilters} />
       </Container>
       <Container maxWidth="sm" sx={{ mt: 5 }}>
-        {events['eventos'].map((event) => (
+        {events.eventos && events.eventos.map((event) => (
           <Evento onImageClick={handleClickOpen}
             key={event._id}
             info={{
-              image: event.imageUrl,
+              image: 'https://sprint-2024-1-acesso-a-cidade-2.onrender.com'+ event.imagem,
               title: event.titulo,
               description: event.descricao,
               date: event.data,
               location: event.local,
               horario: event.horario,
               id : event._id
+              
             }}
           />
         ))}
@@ -117,24 +121,25 @@ function Home(){
 
 function Filtros({ onApplyFilters }) {
   const [valueData, setValueData] = useState(null);
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedTipo, setSelectedTipo] = useState('');
+  const [selectedArea, setSelectedArea] = useState('');
   const [priceRange, setPriceRange] = useState([0, 100]);
-  const [timeRange, setTimeRange] = useState([0, 24]);
 
-  const handleChange = (value) => {
-    setSelectedOptions((prev) =>
-      prev.includes(value)
-        ? prev.filter((option) => option !== value)
-        : [...prev, value]
-    );
+  const handleChangeTipo = (event) => {
+    setSelectedTipo(event.target.value);
+  };
+
+  const handleChangeArea = (event) => {
+    setSelectedArea(event.target.value);
   };
 
   const handleApplyFilters = () => {
     const filters = {
-      date: valueData,
-      types: selectedOptions,
-      priceRange: priceRange,
-      timeRange: timeRange,
+      valor_min: priceRange[0],
+      valor_max: priceRange[1],
+      data: valueData,
+      tipo: selectedTipo,
+      area: selectedArea,
     };
     onApplyFilters(filters);
   };
@@ -142,27 +147,33 @@ function Filtros({ onApplyFilters }) {
   return (
     <Filtro
       Nome={'Filtros'}
-      corFundo={'#1976D2'}
-      corTexto={'white'}
+      corFundo={'#f5f5f5'}
+      corTexto={'black'}
       conteudo={
         <>
           <Filtro Nome='Preço' corTexto={'#757575'} conteudo={<RangeSlider value={priceRange} onChange={(_, newValue) => setPriceRange(newValue)} />} />
           <Filtro
             Nome='Tipo de Evento'
             corTexto={'#757575'}
-            conteudo={<CheckBox handleChange={handleChange} selectedOptions={selectedOptions} opcoes={['Musica', 'Esporte', 'Cinema e Teatro', 'Oficina', 'Comida / Gastronomia', 'Museu', 'Dança']} />}
+            conteudo={
+              <RadioGroup value={selectedTipo} onChange={handleChangeTipo}>
+                {['Musica', 'Esporte', 'Cinema e Teatro', 'Oficina', 'Comida / Gastronomia', 'Museu', 'Dança'].map((option) => (
+                  <FormControlLabel key={option} value={option} control={<Radio />} label={option} />
+                ))}
+              </RadioGroup>
+            }
           />
           <Filtro Nome='Data' corTexto={'#757575'} conteudo={<DataPicker value={valueData} onChange={(newValue) => setValueData(newValue)} />} />
-          <Filtro Nome='Horário' corTexto={'#757575'} conteudo={<HoraPicker value={timeRange} onChange={(_, newValue) => setTimeRange(newValue)} />} />
           <Filtro
             Nome='Área'
             corTexto={'#757575'}
-            conteudo={<CheckBox handleChange={handleChange} selectedOptions={selectedOptions} opcoes={['Fora de Heliópolis', 'Mina', 'sla']} />}
-          />
-          <Filtro
-            Nome='Faixa Etária'
-            corTexto={'#757575'}
-            conteudo={<CheckBox handleChange={handleChange} selectedOptions={selectedOptions} opcoes={['Jovens', 'Velhos']} />}
+            conteudo={
+              <RadioGroup value={selectedArea} onChange={handleChangeArea}>
+                {['Fora de Heliópolis', 'Dentro de Heliópolis'].map((option) => (
+                  <FormControlLabel key={option} value={option} control={<Radio />} label={option} />
+                ))}
+              </RadioGroup>
+            }
           />
           <Button variant="contained" sx={{backgroundColor: 'white', color: '#757575'}} onClick={handleApplyFilters}>Aplicar</Button>
         </>
