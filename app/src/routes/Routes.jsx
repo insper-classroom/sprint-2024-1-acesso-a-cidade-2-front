@@ -9,9 +9,9 @@ import { AuthProvider } from '../context/AuthContext';
 import ProtectedRoute from '../components/ProtectedRoute';
 import Favorites from '../pages/Favorites';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import ResetPassword from './pages/RedefinicaoSenha';
-import UpdatePassword from './pages/Update';
-import TokenValidation from './pages/Validacao';
+import Senha from './pages/RedefinicaoSenha';
+import Update from './pages/Update';
+import Validacao from './pages/Validacao';
 
 function AppRoutes() {
   return (
@@ -32,9 +32,9 @@ function AppRoutes() {
             // }
           />
           <Switch>
-            <Route path="/reset-password" component={ResetPassword} />
-            <Route path="/atualizar-senha" component={UpdatePassword} />
-            <Route path="/validate-token" component={TokenValidation} />
+            <Route path="/reset-password" component={Senha} />
+            <Route path="/atualizar-senha" component={Update} />
+            <Route path="/validate-token" component={Validacao} />
         </Switch>
         </Routes>
       </Router>
