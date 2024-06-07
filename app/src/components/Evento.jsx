@@ -19,7 +19,7 @@ export default function Evento({ info, onImageClick, onFavoriteClick }) {
         return;
       }
       try {
-        const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/eventos/${info.id}/favorito', {
+        const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/favorito', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ export default function Evento({ info, onImageClick, onFavoriteClick }) {
       return;
     }
     const method = isFavorited ? 'DELETE' : 'POST'; // Determine the method based on the current favorite state
-    const url = `http://127.0.0.1:5000/favoritos/${info.id}`;
+    const url = `https://sprint-2024-1-acesso-a-cidade-2-front.vercel.app/favoritos/${info.id}`;
     try {
       const response = await fetch(url, {
         method: method,
