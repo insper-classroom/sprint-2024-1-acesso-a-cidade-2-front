@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
 function UpdatePassword() {
@@ -11,10 +10,23 @@ function UpdatePassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put('https://sprint-2024-1-acesso-a-cidade-2-front.vercel.app/atualizar-senha', { token, senha: password });
-      setMessage(response.data.message);
+      const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/atualizar-senha', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token, senha: password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage(data.message);
+      } else {
+        setMessage('Error: ' + data.message);
+      }
     } catch (error) {
-      setMessage('Error: ' + error.response.data.message);
+      setMessage('Erro ao tentar atualizar a senha. Por favor, tente novamente mais tarde.');
     }
   };
 
