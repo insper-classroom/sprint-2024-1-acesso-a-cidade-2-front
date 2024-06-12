@@ -1,6 +1,4 @@
-
 import React, { useState } from 'react';
-import axios from 'axios';
 
 function ResetPassword() {
   const [email, setEmail] = useState('');
@@ -9,10 +7,23 @@ function ResetPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://sprint-2024-1-acesso-a-cidade-2-front.vercel.app/reset-password', { email });
-      setMessage(response.data.mensagem);
+      const response = await fetch('https://sprint-2024-1-acesso-a-cidade-2.onrender.com/reset-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage(data.mensagem);
+      } else {
+        setMessage('Error: ' + data.mensagem);
+      }
     } catch (error) {
-      setMessage('Error: ' + error.response.data.mensagem);
+      setMessage('Erro ao tentar redefinir a senha. Por favor, tente novamente mais tarde.');
     }
   };
 
@@ -33,3 +44,5 @@ function ResetPassword() {
     </div>
   );
 }
+
+export default ResetPassword;

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
 function TokenValidation() {
@@ -10,10 +9,19 @@ function TokenValidation() {
   useEffect(() => {
     const validateToken = async () => {
       try {
-        const response = await axios.get('https://sprint-2024-1-acesso-a-cidade-2-front.vercel.app/atualizar-senha', { params: { token } });
-        setMessage(response.data.mensagem);
+        const response = await fetch(`https://sprint-2024-1-acesso-a-cidade-2.onrender.com/atualizar-senha?token=${token}`, {
+          method: 'GET',
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          setMessage(data.mensagem);
+        } else {
+          setMessage('Error: ' + data.mensagem);
+        }
       } catch (error) {
-        setMessage('Error: ' + error.response.data.mensagem);
+        setMessage('Erro ao tentar validar o token. Por favor, tente novamente mais tarde.');
       }
     };
 
